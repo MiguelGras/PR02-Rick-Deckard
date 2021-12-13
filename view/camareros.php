@@ -11,6 +11,20 @@
     <title>Vista Proyecto RICK-DECKARD21</title>
 </head>
 <body>
+<div class='paddingtop'>
+    <a class='btnlogout' href="../processes/logout.php">Log Out</a>
+</div>
+
+<a href="" id="open-modal">Soporte</a>
+    <div class="left-part"></div>
+    <div class="right-part"></div>
+    <div class="modal">
+        <div class="content">
+            <h1>Teléfono de soporte 24/7</h1>
+            <p><b>Telf. +34 902 24 25 26 - 806 34 12 77</b></p>
+        </div>
+    </div>
+    <div class="bckg-close"></div>
 
 <?php
 
@@ -23,14 +37,16 @@ session_start();
 if(!empty($_SESSION['email'])){
 
 ?>
-<div class='paddingtop'>
-    <a class='btnlogout' href="../processes/logout.php">Log Out</a>
-</div>
-<div class="table-centrada">
-    <a href='camareros.php'>Camareros</a>
-    <a href='administradores.php'>Administradores</a>
-    <a href='vista.php'>Vista mesas</a>
-</div>
+<br>
+<marquee behavior="scroll" direction="right" scrolldelay="1">Bienvenido <?php echo $_SESSION['email']; ?></marquee>
+<br>
+<h2><b>Administrar Camareros</b></h2>
+<center><div class="table-centrada">
+        <a href='camareros.php' class='btnhistorial'>Camareros</a>
+        <a href='comedor.php' class='btnhistorial'>Comedor</a>
+        <a href='terraza.php' class='btnhistorial'>Terraza</a>
+        <a href='vistaadmin.php' class='btnhistorial'>Vista general</a>
+    </div></center>
 <!------------------->
 <div class="filtrado">
     <form action="camareros.php" method="post">
@@ -49,6 +65,8 @@ echo "<th>Nombre</th>";
 echo "<th>Apellido</th>";
 echo "<th>Email</th>";
 echo "<th>Telefono</th>";
+echo "<th>Modificar</th>";
+echo "<th>Eliminar</th>";
 echo "</tr>";
 
 if(isset($_POST['filtrar'])){
@@ -57,7 +75,7 @@ if(isset($_POST['filtrar'])){
     //------------
     if(empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE apellido_usuario LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_camareros WHERE apellido_usuario LIKE '%{$apellido}%'");
         $select->execute();
         $listaCamareros=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -68,11 +86,13 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
+            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE nombre_usuario LIKE '%{$nombre}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_camareros WHERE nombre_usuario LIKE '%{$nombre}%'");
         $select->execute();
         $listaCamareros=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -83,11 +103,13 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
+            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_camareros WHERE nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
         $select->execute();
         $listaCamareros=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -98,11 +120,13 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
+            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_camareros WHERE nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
         $select->execute();
         $listaCamareros=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -113,13 +137,15 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
+            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }
 
     }else{
         //-------------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios");
+        $select=$pdo->prepare("SELECT * FROM tbl_camareros");
         $select->execute();
         $listaCamareros=$select->fetchAll(PDO::FETCH_ASSOC);
         //-------------------
@@ -130,6 +156,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
+            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }

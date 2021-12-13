@@ -31,6 +31,7 @@ echo "<th>Nombre</th>";
 echo "<th>Apellido</th>";
 echo "<th>Email</th>";
 echo "<th>Telefono</th>";
+echo "<th>Eliminar</th>";
 echo "</tr>";
 
 
@@ -52,6 +53,8 @@ if(!empty($_SESSION['email'])){
         echo "<td>{$administrador['apellido_admin']}</td>";
         echo "<td>{$administrador['email_admin']}</td>";  
         echo "<td>{$administrador['telf_admin']}</td>";
+        echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar usuario</a></td>";
+
     }
 
 
