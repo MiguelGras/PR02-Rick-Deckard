@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2021 a las 18:22:04
+-- Tiempo de generación: 14-12-2021 a las 12:21:32
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.24
 
@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `2122_grasmiguel`
 --
-CREATE DATABASE 2122_grasmiguel;
-USE 2122_grasmiguel;
+CREATE DATABASE IF NOT EXISTS `2122_grasmiguel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `2122_grasmiguel`;
 
 -- --------------------------------------------------------
 
@@ -43,7 +43,31 @@ CREATE TABLE `tbl_administradores` (
 --
 
 INSERT INTO `tbl_administradores` (`id_administrador`, `nombre_admin`, `apellido_admin`, `email_admin`, `contra_admin`, `telf_admin`) VALUES
-(1, 'Marco', 'Marco', 'marco@gmail.com', 'qwe12345', 123456789);
+(1, 'Marco', 'Marco', 'marco@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 123456789);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_camareros`
+--
+
+CREATE TABLE `tbl_camareros` (
+  `id_usuario` int(11) NOT NULL,
+  `nombre_usuario` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `apellido_usuario` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `email_usuario` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `contra_usuario` char(32) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `telf_usuario` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_camareros`
+--
+
+INSERT INTO `tbl_camareros` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `email_usuario`, `contra_usuario`, `telf_usuario`) VALUES
+(1, 'Miguel', 'Gras', 'miguel@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 634549817),
+(2, 'Cristian', 'Guerrero', 'cristian@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 633122211),
+(3, 'Marc', 'Ortiz', 'marc@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 635779744);
 
 -- --------------------------------------------------------
 
@@ -66,7 +90,13 @@ CREATE TABLE `tbl_historial` (
 --
 
 INSERT INTO `tbl_historial` (`id_historial`, `id_mesa`, `capacidad_mesa`, `ubicacion_mesa`, `inicio_reserva`, `fin_reserva`, `email_usuario`) VALUES
-(47, 1, 5, 'terraza', '2021-12-09 16:33:14', '2021-12-09 16:33:17', 'miguel@gmail.com');
+(47, 1, 5, 'terraza', '2021-12-09 16:33:14', '2021-12-09 16:33:17', 'miguel@gmail.com'),
+(48, 6, 5, 'comedor', '2021-12-13 15:47:23', '2021-12-13 15:47:27', 'marco@gmail.com'),
+(49, 1, 5, 'terraza', '2021-12-13 15:49:08', '2021-12-13 15:49:43', 'marco@gmail.com'),
+(50, 1, 5, 'terraza', '2021-12-13 17:15:27', '2021-12-13 17:15:33', 'marco@gmail.com'),
+(51, 1, 5, 'terraza', '2021-12-13 17:15:52', '2021-12-13 17:16:21', 'marco@gmail.com'),
+(52, 1, 5, 'terraza', '2021-12-13 17:15:52', '2021-12-13 17:16:21', 'marco@gmail.com'),
+(53, 3, 3, 'terraza', '2021-12-13 17:16:44', '2021-12-13 17:16:47', 'marco@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -109,30 +139,6 @@ INSERT INTO `tbl_mesas` (`id_mesa`, `capacidad_mesa`, `ubicacion_mesa`, `inicio_
 (19, 5, 'comedor', NULL, NULL, NULL),
 (20, 4, 'comedor', NULL, NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbl_usuarios`
---
-
-CREATE TABLE `tbl_usuarios` (
-  `id_usuario` int(11) NOT NULL,
-  `nombre_usuario` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `apellido_usuario` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `email_usuario` varchar(30) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `contra_usuario` char(32) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `telf_usuario` int(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `tbl_usuarios`
---
-
-INSERT INTO `tbl_usuarios` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `email_usuario`, `contra_usuario`, `telf_usuario`) VALUES
-(1, 'Miguel', '', 'miguel@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 634549817),
-(2, 'Cristian', '', 'cristian@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 633122211),
-(3, 'Marc', '', 'marc@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 635779744);
-
 --
 -- Índices para tablas volcadas
 --
@@ -142,6 +148,12 @@ INSERT INTO `tbl_usuarios` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, 
 --
 ALTER TABLE `tbl_administradores`
   ADD PRIMARY KEY (`id_administrador`);
+
+--
+-- Indices de la tabla `tbl_camareros`
+--
+ALTER TABLE `tbl_camareros`
+  ADD PRIMARY KEY (`id_usuario`);
 
 --
 -- Indices de la tabla `tbl_historial`
@@ -157,12 +169,6 @@ ALTER TABLE `tbl_mesas`
   ADD PRIMARY KEY (`id_mesa`);
 
 --
--- Indices de la tabla `tbl_usuarios`
---
-ALTER TABLE `tbl_usuarios`
-  ADD PRIMARY KEY (`id_usuario`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -173,22 +179,22 @@ ALTER TABLE `tbl_administradores`
   MODIFY `id_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_camareros`
+--
+ALTER TABLE `tbl_camareros`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_historial`
 --
 ALTER TABLE `tbl_historial`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_mesas`
 --
 ALTER TABLE `tbl_mesas`
   MODIFY `id_mesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT de la tabla `tbl_usuarios`
---
-ALTER TABLE `tbl_usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
