@@ -69,15 +69,15 @@ echo "<th>Quitar mesa</th>";
 echo "</tr>";
 
     //-------------------
-    $comedor=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='comedor'");
-    $comedor->execute();
-    $listaComedor=$comedor->fetchAll(PDO::FETCH_ASSOC);
+    $terraza=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='comedor'");
+    $terraza->execute();
+    $listaTerraza=$terraza->fetchAll(PDO::FETCH_ASSOC);
     //-------------------
-    foreach ($listaComedor as $mesacomedor) {
+    foreach ($listaTerraza as $mesaterraza) {
         echo "<tr>";
-        echo "<td><b>{$mesacomedor['id_mesa']}</b></td>";
-        echo "<td>{$mesacomedor['capacidad_mesa']} sillas</td>";
-        //echo "<td>{$mesacomedor['ubicacion_mesa']}</td>";
+        echo "<td><b>{$mesaterraza['id_mesa']}</b></td>";
+        echo "<td>{$mesaterraza['capacidad_mesa']}</td>";
+        //echo "<td>{$mesaterraza['ubicacion_mesa']}</td>";
         echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>";
         echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar mesa</a></td>";
 
