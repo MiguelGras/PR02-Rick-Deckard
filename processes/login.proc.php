@@ -4,9 +4,7 @@
 include '../services/config.php';
 include '../services/conexion.php';
 /*
-#Hacemos request del usuario y la contraseña que pillamos del login
-$email=$_REQUEST['email'];
-$pass=$_REQUEST['contraseña'];
+
 
 $email = mysqli_real_escape_string($servidor,$email); //hace que este string no pueda tener carácteres especiales cómo comillas
 #Comprobamos que el usuario y contraseña existan en la tabla ADMIN
