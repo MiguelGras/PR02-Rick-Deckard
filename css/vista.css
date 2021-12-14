@@ -137,6 +137,7 @@ h2 {
     font-size: 50px;
     text-align: center;
     padding: 20px 0px 5px 0px;
+    margin-top: 5px;
 }
 
 .table {
@@ -237,7 +238,7 @@ h2 {
 }
 
 .paddingtop {
-    padding: 25px 10% 0px 0px;
+    padding: 25px 10% 25px 0px;
     text-align: right;
 }
 

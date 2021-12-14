@@ -76,7 +76,7 @@ echo "</tr>";
     foreach ($listaTerraza as $mesaterraza) {
         echo "<tr>";
         echo "<td><b>{$mesaterraza['id_mesa']}</b></td>";
-        echo "<td>{$mesaterraza['capacidad_mesa']}</td>";
+        echo "<td>{$mesaterraza['capacidad_mesa']} sillas</td>";
         //echo "<td>{$mesaterraza['ubicacion_mesa']}</td>";
         echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>";
         echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar mesa</a></td>";

@@ -43,15 +43,13 @@ session_start();
 if(!empty($_SESSION['email'])){
 
 ?>
+
 <br>
 <marquee behavior="scroll" direction="right" scrolldelay="1">Bienvenido <?php echo $_SESSION['email']; ?></marquee>
 <br>
 
 <?php
     echo "<h2><b>Administrar mesas</b></h2>";
-    $ubicacion=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
-    $ubicacion->execute();
-    $listaUbicacion=$ubicacion->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <center><div class="table-centrada">
     <a href='camareros.php' class='btnhistorial'>Camareros</a>
@@ -61,16 +59,8 @@ if(!empty($_SESSION['email'])){
 </div></center>
 
 <div class="filtrado">
-    <form action="vista.php" method="post">
+    <form action="vistaadmin.php" method="post">
         <input class="filtradobtn2" type="text" placeholder="Capacidad mesa" name="capacidad_mesa">
-        <?php
-        echo "<select name='ubicacion_mesa'>";
-        echo "<option value='%%'>Ubicación</option>";
-            foreach($listaUbicacion as $ubicacion){
-                echo "<option value='".$ubicacion['ubicacion_mesa']."'>".$ubicacion['ubicacion_mesa']."</option>";
-            }
-        echo "</select>";
-        ?>
         <input class="filtradobtn" type="submit" value="Filtrar" name="filtrar">
     </form>
 </div>
@@ -93,29 +83,15 @@ echo "</tr>";
 //Con filtro
 if(isset($_POST['filtrar'])){
     $capacidad=$_POST['capacidad_mesa'];
-    $ubicacion=$_POST['ubicacion_mesa'];
+    //$ubicacion=$_POST['ubicacion_mesa'];
     //var_dump($capacidad);
     //var_dump($ubicacion);
     //Filtrar solo por ubicacion
     //------------
-    if(empty($capacidad=$_POST['capacidad_mesa']) && !empty($ubicacion=$_POST['ubicacion_mesa'])){
-    $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa LIKE '%{$ubicacion}%'");
-    $select->execute();
-    $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
-    //------------
-    foreach ($listaFiltro as $filtro) {
-        echo "<tr>";
-        echo "<td><b>{$filtro['id_mesa']}</b></td>";
-        echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-        echo "<td>{$filtro['ubicacion_mesa']}</td>"; 
-        echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-        echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
-        echo '</tr>';
-    }
     //Filtrar solo por capacidad    
-    }elseif(!empty($capacidad=$_POST['capacidad_mesa']) && empty($ubicacion=$_POST['ubicacion_mesa'])){
+    if(!empty($capacidad=$_POST['capacidad_mesa'])){
             //------------    
-            $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa>=$capacidad");
+            $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa=$capacidad");
             //$select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa>='{$capacidad}' order by capacidad_mesa DESC");
             $select->execute();
             $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
@@ -125,27 +101,11 @@ if(isset($_POST['filtrar'])){
                 echo "<td><b>{$filtro['id_mesa']}</b></td>";
                 echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
                 echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-                echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-                echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+                echo"<td><a href='../processes/modificarmesa.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
+                echo"<td><a href='../processes/eliminarmesa.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Eliminar mesa</a></td>";
                 echo '</tr>';
             }
     //Filtrar teniendo los 2 parametros
-    }elseif(!empty($capacidad=$_POST['capacidad_mesa']) && !empty($ubicacion=$_POST['ubicacion_mesa'])){
-        //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa LIKE '%{$ubicacion}%' and capacidad_mesa=$capacidad");
-        $select->execute();
-        $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
-        //------------
-        foreach ($listaFiltro as $filtro) {
-            echo "<tr>";
-            echo "<td><b>{$filtro['id_mesa']}</b></td>";
-            echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-            echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-            echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
-            echo '</tr>';
-        }
-    }
     //Filtrar sin añadir parametros
     }else{
         //------------
@@ -158,13 +118,14 @@ if(isset($_POST['filtrar'])){
             echo "<td><b>{$filtro['id_mesa']}</b></td>";
             echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
             echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-            echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+            echo"<td><a href='../processes/modificarmesa.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
+            echo"<td><a href='../processes/eliminarmesa.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Eliminar mesa</a></td>";
             echo '</tr>';
         }
     }
 }else{
     header("Location:../index.php");
+}
 }
 ?>
 </body>
