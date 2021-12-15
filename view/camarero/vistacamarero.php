@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/vista.css">
+    <link rel="stylesheet" type="text/css" href="../../css/vista.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/modalbox.js"></script>
-    <script src="../js/vista.js"></script>
+    <script src="../../js/modalbox.js"></script>
+    <script src="../../js/vista.js"></script>
     <title>Vista Proyecto RICK-DECKARD21</title>
 </head>
 <body>
 <div class='paddingtop'>
-        <a class='btnlogout' href='../processes/logout.php'>Log Out</a>
+    <a class='btnlogout' href="../../processes/logout.php">Log Out</a>
 </div>
 
 
@@ -34,8 +34,8 @@
 <?php
 
 
-include 'ver.php';
-include '../services/conexion.php';
+include '../ver.php';
+include '../../services/conexion.php';
 
 session_start();
 
@@ -47,21 +47,20 @@ if(!empty($_SESSION['email'])){
 <marquee behavior="scroll" direction="right" scrolldelay="1">Bienvenido <?php echo $_SESSION['email']; ?></marquee>
 <br>
 
+<div class="table-centrada">
+    <a href='camareros.php'>Camareros</a>
+    <a href='administradores.php'>Administradores</a>
+    <a href='vista.php'>Vista mesas</a>
+</div>
 <?php
     echo "<h2><b>Administrar mesas</b></h2>";
     $ubicacion=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
     $ubicacion->execute();
     $listaUbicacion=$ubicacion->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<center><div class="table-centrada">
-    <a href='camareros.php' class='btnhistorial'>Camareros</a>
-    <a href='comedor.php' class='btnhistorial'>Comedor</a>
-    <a href='terraza.php' class='btnhistorial'>Terraza</a>
-    <a href='vistaadmin.php' class='btnhistorial'>Vista general</a>
-</div></center>
 
 <div class="filtrado">
-    <form action="vista.php" method="post">
+    <form action="vistacamarero.php" method="post">
         <input class="filtradobtn2" type="text" placeholder="Capacidad mesa" name="capacidad_mesa">
         <?php
         echo "<select name='ubicacion_mesa'>";
@@ -76,7 +75,7 @@ if(!empty($_SESSION['email'])){
 </div>
 <?php
 echo "<div class='centradotd'";
-echo"<td><a href='../view/historial.php' class='btnhistorial'>Historial</a></td>";
+echo"<td><a href='../../view/historial.php' class='btnhistorial'>Historial</a></td>";
 echo "</div>";
 
 echo "<div class='table-centrada'>";
@@ -84,9 +83,11 @@ echo "<table class='table'>";
 echo "<tr>";
 echo "<th>Nº Mesa</th>";
 echo "<th>Capacidad</th>";
-echo "<th>Ubicacion</th>";
-echo "<th>Modificar</th>";
-echo "<th>Quitar mesa</th>";
+echo "<th>Ubicación</th>";
+//echo "<th>Inicio de la reserva</th>";
+//echo "<th>Fin de la reserva</th>"; //comentar
+//echo "<th>Reservado por </th>";
+echo "<th>Reservar/Quitar reserva</th>";
 echo "</tr>";
 
 
@@ -107,9 +108,14 @@ if(isset($_POST['filtrar'])){
         echo "<tr>";
         echo "<td><b>{$filtro['id_mesa']}</b></td>";
         echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-        echo "<td>{$filtro['ubicacion_mesa']}</td>"; 
-        echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-        echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+        echo "<td>{$filtro['ubicacion_mesa']}</td>";  
+        //echo "<td>{$filtro['inicio_reserva']}</td>";
+        //echo "<td>{$filtro['email_usuario']}</td>";
+        //if ($filtro['inicio_reserva']=$filtro['inicio_reserva']) {
+            //echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+        //}else {
+            echo"<td><a href='../processes/detallemesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
+        //}
         echo '</tr>';
     }
     //Filtrar solo por capacidad    
@@ -125,8 +131,12 @@ if(isset($_POST['filtrar'])){
                 echo "<td><b>{$filtro['id_mesa']}</b></td>";
                 echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
                 echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-                echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-                echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+                //echo "<td>{$filtro['inicio_reserva']}</td>";
+                //echo "<td>{$filtro['email_usuario']}</td>";
+                //if ($filtro['inicio_reserva']=$filtro['inicio_reserva']) {
+                    //echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+                //}else {
+                    echo"<td><a href='../processes/detallemesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";                //}
                 echo '</tr>';
             }
     //Filtrar teniendo los 2 parametros
@@ -141,8 +151,12 @@ if(isset($_POST['filtrar'])){
             echo "<td><b>{$filtro['id_mesa']}</b></td>";
             echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
             echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-            echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+            //echo "<td>{$filtro['inicio_reserva']}</td>";
+            //echo "<td>{$filtro['email_usuario']}</td>";
+            //if ($filtro['inicio_reserva']=$filtro['inicio_reserva']) {
+                //echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+            //}else {
+                echo"<td><a href='../processes/detallemesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";            //}
             echo '</tr>';
         }
     }
@@ -158,8 +172,12 @@ if(isset($_POST['filtrar'])){
             echo "<td><b>{$filtro['id_mesa']}</b></td>";
             echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
             echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar mesa</a></td>"; 
-            echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+            //echo "<td>{$filtro['inicio_reserva']}</td>";
+            //echo "<td>{$filtro['email_usuario']}</td>";
+            //if ($filtro['inicio_reserva']=$filtro['inicio_reserva']) {
+                //echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
+            //}else {
+                echo"<td><a href='../processes/detallemesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";            //}
             echo '</tr>';
         }
     }

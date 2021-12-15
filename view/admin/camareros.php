@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/vista.css">
+    <link rel="stylesheet" type="text/css" href="../../css/vista.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/modalbox.js"></script>
-    <script src="../js/vista.js"></script>
+    <script src="../../js/modalbox.js"></script>
+    <script src="../../js/vista.js"></script>
     <title>Vista Proyecto RICK-DECKARD21</title>
 </head>
 <body>
 <div class='paddingtop'>
-    <a class='btnlogout' href="../processes/logout.php">Log Out</a>
+    <a class='btnlogout' href="../../processes/logout.php">Log Out</a>
 </div>
 
 <a href="" id="open-modal">Soporte</a>
@@ -29,8 +29,8 @@
 <?php
 
 
-include 'ver.php';
-include '../services/conexion.php';
+include '../ver.php';
+include '../../services/conexion.php';
 //-------------------
 session_start();
 //-------------------
@@ -43,9 +43,9 @@ if(!empty($_SESSION['email'])){
 <h2><b>Administrar Camareros</b></h2>
 <center><div class="table-centrada">
         <a href='camareros.php' class='btnhistorial'>Camareros</a>
-        <a href='comedor.php' class='btnhistorial'>Comedor</a>
-        <a href='terraza.php' class='btnhistorial'>Terraza</a>
-        <a href='vistaadmin.php' class='btnhistorial'>Vista general</a>
+        <!--<a href='comedor.php' class='btnhistorial'>Comedor</a>-->
+        <a href='administradores.php' class='btnhistorial'>Administradores</a>
+        <a href='vistaadmin.php' class='btnhistorial'>Vista mesas</a>
     </div></center>
 <!------------------->
 <div class="filtrado">
@@ -54,6 +54,12 @@ if(!empty($_SESSION['email'])){
         <input class="filtradobtn2" type="text" placeholder="Apellido" name="apellido_usuario">
         <input class="filtradobtn" type="submit" value="Filtrar" name="filtrar">
     </form>
+</div>
+
+<div class='centradotd'>
+<?php
+echo"<td><a href='../../processes/admin/formulario.insertar.camarero.php' class='btnhistorial'>Crear camarero</a></td>";
+?>
 </div>
 <!------------------->
 <?php
@@ -86,8 +92,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/modificar.camarero.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/eliminar.camarero.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
@@ -103,8 +109,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
@@ -120,8 +126,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
@@ -137,8 +143,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }
@@ -156,14 +162,14 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }
 
 }else{
-    header("Location:../index.php");
+    header("Location:../../index.php");
 }
 ?>
 

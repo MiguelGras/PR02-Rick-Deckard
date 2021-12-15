@@ -1,7 +1,7 @@
 <?php
 
-include '../services/config.php';
-include '../services/conexion.php';
+include '../../services/config.php';
+include '../../services/conexion.php';
 $sentencia=$pdo->prepare("SELECT * FROM tbl_mesas");
 $sentencia->execute();
 $listaMesas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
