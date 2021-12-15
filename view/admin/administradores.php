@@ -103,8 +103,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$admin['apellido_admin']}</td>";
             echo "<td>{$admin['email_admin']}</td>";  
             echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_admin']) && empty($apellido=$_POST['apellido_admin'])){
@@ -120,8 +120,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$admin['apellido_admin']}</td>";
             echo "<td>{$admin['email_admin']}</td>";  
             echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_admin']) && !empty($apellido=$_POST['apellido_admin'])){
@@ -137,8 +137,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$admin['apellido_admin']}</td>";
             echo "<td>{$admin['email_admin']}</td>";  
             echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
     }elseif(empty($nombre=$_POST['nombre_admin']) && empty($apellido=$_POST['apellido_admin'])){
@@ -154,8 +154,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$admin['apellido_admin']}</td>";
             echo "<td>{$admin['email_admin']}</td>";  
             echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
     }
@@ -173,8 +173,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$admin['apellido_admin']}</td>";
             echo "<td>{$admin['email_admin']}</td>";  
             echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
     }
