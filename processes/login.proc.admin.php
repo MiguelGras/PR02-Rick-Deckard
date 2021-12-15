@@ -44,9 +44,9 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
             print_r($comprobacion);
             $_SESSION['email']=$email;
             //header("location:../view/vista.php?email=$email");
-            header("location:../view/vistaadmin.php");
+            header("location:../view/admin/vistaadmin.php");
         }else {
-            header("location: ../view/loginadmin.html");
+            header("location: ../view/admin/loginadmin.html");
             //echo '<script language="javascript">alert("Email o contraseña incorrectos");</script>';
             
         }
@@ -54,5 +54,5 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
         echo $e->getMessage();
     }
 }else{
-    header("location: ../view/loginadmin.html");
+    header("location: ../view/admin/loginadmin.html");
 }
