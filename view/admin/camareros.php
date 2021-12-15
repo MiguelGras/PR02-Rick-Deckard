@@ -58,7 +58,7 @@ if(!empty($_SESSION['email'])){
 
 <div class='centradotd'>
 <?php
-echo"<td><a href='../../processes/admin/formulario.insertar.camarero.php' class='btnhistorial'>Crear camarero</a></td>";
+echo"<td><a href='../../processes/camarero/formulario.insertar.php' class='btnhistorial'>Crear camarero</a></td>";
 ?>
 </div>
 <!------------------->
@@ -92,8 +92,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/modificar.camarero.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/eliminar.camarero.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$camarero['id_usuario']}&nombre_usuario={$camarero['nombre_usuario']}&apellido_usuario={$camarero['apellido_usuario']}&email_usuario={$camarero['email_usuario']}&telf_usuario={$camarero['telf_usuario']}&contra_usuario={$camarero['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/eliminar.camarero.php?id_usuario={$camarero['id_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
@@ -109,8 +109,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$camarero['id_usuario']}&nombre_usuario={$camarero['nombre_usuario']}&apellido_usuario={$camarero['apellido_usuario']}&email_usuario={$camarero['email_usuario']}&telf_usuario={$camarero['telf_usuario']}&contra_usuario={$camarero['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/eliminar.camarero.php?id_usuario={$camarero['id_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
@@ -126,8 +126,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$camarero['id_usuario']}&nombre_usuario={$camarero['nombre_usuario']}&apellido_usuario={$camarero['apellido_usuario']}&email_usuario={$camarero['email_usuario']}&telf_usuario={$camarero['telf_usuario']}&contra_usuario={$camarero['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/eliminar.camarero.php?id_usuario={$camarero['id_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }elseif(empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
@@ -143,8 +143,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$camarero['id_usuario']}&nombre_usuario={$camarero['nombre_usuario']}&apellido_usuario={$camarero['apellido_usuario']}&email_usuario={$camarero['email_usuario']}&telf_usuario={$camarero['telf_usuario']}&contra_usuario={$camarero['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/eliminar.camarero.php?id_usuario={$camarero['id_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }
@@ -162,8 +162,8 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$camarero['apellido_usuario']}</td>";
             echo "<td>{$camarero['email_usuario']}</td>";  
             echo "<td>{$camarero['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/modificar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Modificar Camarero</a></td>";
-            echo"<td><a href='../../processes/eliminar.php?email_usuario={$_SESSION['email']}' class='btnquitar'>Eliminar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$camarero['id_usuario']}&nombre_usuario={$camarero['nombre_usuario']}&apellido_usuario={$camarero['apellido_usuario']}&email_usuario={$camarero['email_usuario']}&telf_usuario={$camarero['telf_usuario']}&contra_usuario={$camarero['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/camarero/eliminar.camarero.php?id_usuario={$camarero['id_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
     }

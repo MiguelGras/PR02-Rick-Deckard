@@ -14,12 +14,12 @@
 
 <body>
 <div class='paddingtop'>
-        <a class='btnhistorial' href='../../view/admin/administradores.php'>Atras</a>
+        <a class='btnhistorial' href='../../view/admin/camareros.php'>Atras</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
     <br>
 <div class="filtrado">
-    <form action="insertar.admin.php" method="POST">
+    <form action="insertar.camarero.php" method="POST">
         <p>Nombre: <input type="text" name="nombre" size="60" required></p>
         <p>Apellido: <input type="text" name="apellido" size="40" required></p>
         <p>Email: <input type="email" name="email" size="40" required></p>
