@@ -34,7 +34,9 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     $email=$_POST['email'];
     $pass=$_POST['pass'];
     //----------------
-    $loginadmin = $pdo->prepare("SELECT * FROM tbl_administradores WHERE email_admin='$email' and contra_admin=MD5('{$pass}')");
+    $loginadmin = $pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and email_usuario='$email' and contra_usuario=MD5('{$pass}')");
+    //print_r($loginadmin);
+    //die;
     //----------------
     $loginadmin->execute();
     $comprobacion=$loginadmin->fetchAll(PDO::FETCH_ASSOC);

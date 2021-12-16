@@ -44,12 +44,7 @@ if(!empty($_SESSION['email'])){
 <marquee behavior="scroll" direction="right" scrolldelay="1">Bienvenido <?php echo $_SESSION['email']; ?></marquee>
 <br>
 
-<?php
-    echo "<h2><b>Administrar mesas</b></h2>";
-    $ubicacion=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
-    $ubicacion->execute();
-    $listaUbicacion=$ubicacion->fetchAll(PDO::FETCH_ASSOC);
-?>
+<h2><b>Administrar Administradores</b></h2>
     <center><div class="table-centrada">
         <a href='camareros.php' class='btnhistorial'>Camareros</a>
         <!--<a href='comedor.php' class='btnhistorial'>Comedor</a>-->
@@ -59,8 +54,8 @@ if(!empty($_SESSION['email'])){
 
 <div class="filtrado">
     <form action="administradores.php" method="post">
-        <input class="filtradobtn2" type="text" placeholder="Nombre" name="nombre_admin">
-        <input class="filtradobtn2" type="text" placeholder="Apellido" name="apellido_admin">
+        <input class="filtradobtn2" type="text" placeholder="Nombre" name="nombre_usuario">
+        <input class="filtradobtn2" type="text" placeholder="Apellido" name="apellido_usuario">
         <input class="filtradobtn" type="submit" value="Filtrar" name="filtrar">
     </form>
 </div>
@@ -84,97 +79,95 @@ echo "<th>Modificar</th>";
 echo "<th>Eliminar</th>";
 echo "</tr>";
 
-
-
 if(isset($_POST['filtrar'])){
-    $nombre=$_POST['nombre_admin'];
-    $apellido=$_POST['apellido_admin'];
+    $nombre=$_POST['nombre_usuario'];
+    $apellido=$_POST['apellido_usuario'];
     //------------
-    if(empty($nombre=$_POST['nombre_admin']) && !empty($apellido=$_POST['apellido_admin'])){
+    if(empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_administradores WHERE apellido_admin LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and apellido_usuario LIKE '%{$apellido}%'");
         $select->execute();
-        $listaAdmins=$select->fetchAll(PDO::FETCH_ASSOC);
+        $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
-        foreach ($listaAdmins as $admin) {
+        foreach ($listaUsuarios as $user) {
             echo "<tr>";
-            echo "<td><b>{$admin['id_administrador']}</b></td>";
-            echo "<td>{$admin['nombre_admin']}</td>";
-            echo "<td>{$admin['apellido_admin']}</td>";
-            echo "<td>{$admin['email_admin']}</td>";  
-            echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
+            echo "<td><b>{$user['id_usuario']}</b></td>";
+            echo "<td>{$user['nombre_usuario']}</td>";
+            echo "<td>{$user['apellido_usuario']}</td>";
+            echo "<td>{$user['email_usuario']}</td>";  
+            echo "<td>{$user['telf_usuario']}</td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
-    }elseif(!empty($nombre=$_POST['nombre_admin']) && empty($apellido=$_POST['apellido_admin'])){
+    }elseif(!empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_administradores WHERE nombre_admin LIKE '%{$nombre}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%'");
         $select->execute();
-        $listaAdmins=$select->fetchAll(PDO::FETCH_ASSOC);
+        $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
-        foreach ($listaAdmins as $admin) {
+        foreach ($listaUsuarios as $user) {
             echo "<tr>";
-            echo "<td><b>{$admin['id_administrador']}</b></td>";
-            echo "<td>{$admin['nombre_admin']}</td>";
-            echo "<td>{$admin['apellido_admin']}</td>";
-            echo "<td>{$admin['email_admin']}</td>";  
-            echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
+            echo "<td><b>{$user['id_usuario']}</b></td>";
+            echo "<td>{$user['nombre_usuario']}</td>";
+            echo "<td>{$user['apellido_usuario']}</td>";
+            echo "<td>{$user['email_usuario']}</td>";  
+            echo "<td>{$user['telf_usuario']}</td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
-    }elseif(!empty($nombre=$_POST['nombre_admin']) && !empty($apellido=$_POST['apellido_admin'])){
+    }elseif(!empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_administradores WHERE nombre_admin LIKE '%{$nombre}%' and apellido_admin LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
         $select->execute();
-        $listaAdmins=$select->fetchAll(PDO::FETCH_ASSOC);
+        $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
-        foreach ($listaAdmins as $admin) {
+        foreach ($listaUsuarios as $user) {
             echo "<tr>";
-            echo "<td><b>{$admin['id_administrador']}</b></td>";
-            echo "<td>{$admin['nombre_admin']}</td>";
-            echo "<td>{$admin['apellido_admin']}</td>";
-            echo "<td>{$admin['email_admin']}</td>";  
-            echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
+            echo "<td><b>{$user['id_usuario']}</b></td>";
+            echo "<td>{$user['nombre_usuario']}</td>";
+            echo "<td>{$user['apellido_usuario']}</td>";
+            echo "<td>{$user['email_usuario']}</td>";  
+            echo "<td>{$user['telf_usuario']}</td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
-    }elseif(empty($nombre=$_POST['nombre_admin']) && empty($apellido=$_POST['apellido_admin'])){
+    }elseif(empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_administradores WHERE nombre_admin LIKE '%{$nombre}%' and apellido_admin LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
         $select->execute();
-        $listaAdmins=$select->fetchAll(PDO::FETCH_ASSOC);
+        $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
-        foreach ($listaAdmins as $admin) {
+        foreach ($listaUsuarios as $user) {
             echo "<tr>";
-            echo "<td><b>{$admin['id_administrador']}</b></td>";
-            echo "<td>{$admin['nombre_admin']}</td>";
-            echo "<td>{$admin['apellido_admin']}</td>";
-            echo "<td>{$admin['email_admin']}</td>";  
-            echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
+            echo "<td><b>{$user['id_usuario']}</b></td>";
+            echo "<td>{$user['nombre_usuario']}</td>";
+            echo "<td>{$user['apellido_usuario']}</td>";
+            echo "<td>{$user['email_usuario']}</td>";  
+            echo "<td>{$user['telf_usuario']}</td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
     }
 
     }else{
         //-------------------
-        $select=$pdo->prepare("SELECT * FROM tbl_administradores");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin'");
         $select->execute();
-        $listaAdmins=$select->fetchAll(PDO::FETCH_ASSOC);
+        $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //-------------------
-        foreach ($listaAdmins as $admin) {
+        foreach ($listaUsuarios as $user) {
             echo "<tr>";
-            echo "<td><b>{$admin['id_administrador']}</b></td>";
-            echo "<td>{$admin['nombre_admin']}</td>";
-            echo "<td>{$admin['apellido_admin']}</td>";
-            echo "<td>{$admin['email_admin']}</td>";  
-            echo "<td>{$admin['telf_admin']}</td>";
-            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_administrador={$admin['id_administrador']}&nombre_admin={$admin['nombre_admin']}&apellido_admin={$admin['apellido_admin']}&email_admin={$admin['email_admin']}&telf_admin={$admin['telf_admin']}&contra_admin={$admin['contra_admin']}' class='btnquitar'>Modificar Administrador</a></td>";
-            echo"<td><a href='../../processes/admin/eliminar.admin.php?id_administrador={$admin['id_administrador']}' class='btnquitar'>Eliminar Administrador</a></td>";
+            echo "<td><b>{$user['id_usuario']}</b></td>";
+            echo "<td>{$user['nombre_usuario']}</td>";
+            echo "<td>{$user['apellido_usuario']}</td>";
+            echo "<td>{$user['email_usuario']}</td>";  
+            echo "<td>{$user['telf_usuario']}</td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Administrador</a></td>";
+            echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Administrador</a></td>";
             echo '</tr>';
         }
     }

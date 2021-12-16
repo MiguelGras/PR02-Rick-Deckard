@@ -10,7 +10,7 @@ $email=$_POST['email'];
 $telf=$_POST['telf'];
 $contra=$_POST['contra'];
 
-    /*echo $id_usuario;
+    echo $id_usuario;
     echo "<br>";
     echo $nombre;
     echo "<br>";
@@ -19,7 +19,7 @@ $contra=$_POST['contra'];
     echo $telf;
     echo "<br>";
     echo $contra;
-    die;*/
+    die;
 
 $insert = $pdo->prepare("UPDATE tbl_camareros SET id_usuario='{$id_usuario}', nombre_usuario='{$nombre}', apellido_usuario='{$apellido}', email_usuario='{$email}', contra_usuario=MD5('{$contra}'), telf_usuario='{$telf}' WHERE id_usuario='{$id_usuario}'");
 /*print_r($insert);

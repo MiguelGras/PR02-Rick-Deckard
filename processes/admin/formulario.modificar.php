@@ -17,14 +17,15 @@
 
 include '../../services/config.php';
 include '../../services/conexion.php';
-    $id_admin=$_GET['id_administrador'];
-    $nombre=$_GET['nombre_admin'];
-    $apellido=$_GET['apellido_admin'];
-    $email=$_GET['email_admin'];
-    $telf=$_GET['telf_admin'];
-    $contra=$_GET['contra_admin'];
+    $id_usuario=$_GET['id_usuario'];
+    $nombre=$_GET['nombre_usuario'];
+    $apellido=$_GET['apellido_usuario'];
+    $email=$_GET['email_usuario'];
+    $telf=$_GET['telf_usuario'];
+    $contra=$_GET['contra_usuario'];
 
-    /*echo $id_admin;
+    /*
+    echo $id_usuario;
     echo "<br>";
     echo $nombre;
     echo "<br>";
@@ -33,7 +34,8 @@ include '../../services/conexion.php';
     echo $telf;
     echo "<br>";
     echo $contra;
-    die;*/
+    die;
+    */
 
 ?>
 <div class='paddingtop'>
@@ -43,7 +45,7 @@ include '../../services/conexion.php';
     <br>
 <?php
 echo "<div class='filtrado'>";
-    echo "<form action='modificar.admin.php?id_administrador={$id_admin}' method='POST'>";
+    echo "<form action='modificar.admin.php?id_usuario={$id_usuario}' method='POST'>";
         echo "<p>Nombre: <input type='text' name='nombre' size='60' value='{$nombre}' required></p>";
         echo "<p>Apellido: <input type='text' name='apellido' size='40' value='{$apellido}' required></p>";
         echo "<p>Email: <input type='email' name='email' size='40' value='{$email}' required></p>";

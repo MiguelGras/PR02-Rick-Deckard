@@ -134,7 +134,7 @@ if(isset($_POST['filtrar'])){
     //Filtrar sin añadir parametros
     }else{
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_mesas");
+        $select=$pdo->prepare("SELECT * FROM tbl_mesas ORDER BY ubicacion_mesa DESC");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
