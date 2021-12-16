@@ -32,7 +32,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     $email=$_POST['email'];
     $pass=$_POST['pass'];
     //----------------
-    $logincam = $pdo->prepare("SELECT * FROM tbl_camareros WHERE email_usuario='$email' and contra_usuario=MD5('{$pass}')");
+    $logincam = $pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='camarero' and email_usuario='$email' and contra_usuario=MD5('{$pass}')");
     //----------------
     $logincam->execute();
     $comprobacion=$logincam->fetchAll(PDO::FETCH_ASSOC);
@@ -44,7 +44,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
             header("location:../view/camarero/vistacamarero.php?email=$email");
         }else {
             header("location: ../view/login.html");
-            //echo '<script language="javascript">alert("Email o contraseña incorrectos");</script>';
+            //echo "<script language='javascript'>alert('Email o contraseña incorrectos');</script>";
             
         }
     } catch (PDOException $e) {
