@@ -32,7 +32,7 @@ $horamas= date ('H:i' , $horama);
     echo $horamas;
     die;
 */
-$select = $pdo->prepare("SELECT id_reserva,fecha_reserva,hora_inicio_reserva,hora_fin_reserva FROM tbl_reservas WHERE hora_inicio_reserva BETWEEN '{$horamenos}' AND '{$horamas}'");
+$select = $pdo->prepare("SELECT id_reserva,fecha_reserva,hora_inicio_reserva,hora_fin_reserva FROM tbl_reservas WHERE fecha_reserva='{$fecha}' and hora_inicio_reserva BETWEEN '{$horamenos}' AND '{$horamas}' and id_mesa='{$id_mesa}'");
 $select-> execute();
 $listaReservas=$select->fetchAll(PDO::FETCH_ASSOC);
 /*
