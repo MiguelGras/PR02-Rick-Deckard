@@ -58,7 +58,7 @@ if(!empty($_SESSION['email'])){
 
 <div class='centradotd'>
 <?php
-echo"<td><a href='../../processes/admin/formulario.insertar.php' class='btnhistorial'>Crear camarero</a></td>";
+echo"<td><a href='../../processes/admin/formulario.insertar.php' class='btnhistorial'>Crear usuario</a></td>";
 ?>
 </div>
 <!------------------->
@@ -92,7 +92,7 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$user['apellido_usuario']}</td>";
             echo "<td>{$user['email_usuario']}</td>";  
             echo "<td>{$user['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
             echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
@@ -109,7 +109,7 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$user['apellido_usuario']}</td>";
             echo "<td>{$user['email_usuario']}</td>";  
             echo "<td>{$user['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
             echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
@@ -126,7 +126,7 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$user['apellido_usuario']}</td>";
             echo "<td>{$user['email_usuario']}</td>";  
             echo "<td>{$user['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
             echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
@@ -143,7 +143,7 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$user['apellido_usuario']}</td>";
             echo "<td>{$user['email_usuario']}</td>";  
             echo "<td>{$user['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
             echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }
@@ -162,7 +162,7 @@ if(isset($_POST['filtrar'])){
             echo "<td>{$user['apellido_usuario']}</td>";
             echo "<td>{$user['email_usuario']}</td>";  
             echo "<td>{$user['telf_usuario']}</td>";
-            echo"<td><a href='../../processes/camarero/formulario.modificar.php?id_usuario={$user['id_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
+            echo"<td><a href='../../processes/admin/formulario.modificar.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}&nombre_usuario={$user['nombre_usuario']}&apellido_usuario={$user['apellido_usuario']}&email_usuario={$user['email_usuario']}&telf_usuario={$user['telf_usuario']}&contra_usuario={$user['contra_usuario']}' class='btnquitar'>Modificar Camarero</a></td>";
             echo"<td><a href='../../processes/admin/eliminar.usuario.php?id_usuario={$user['id_usuario']}&tipo_usuario={$user['tipo_usuario']}' class='btnquitar'>Eliminar Camarero</a></td>";
             echo '</tr>';
         }

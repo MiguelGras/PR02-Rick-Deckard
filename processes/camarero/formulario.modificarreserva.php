@@ -15,15 +15,22 @@
 <body>
 <?php 
 
+
 include '../../services/config.php';
 include '../../services/conexion.php';
+
+session_start();
+if(!empty($_SESSION['email'])){
+
     $id_mesa=$_GET['id_mesa'];
     $id_reserva=$_GET['id_reserva'];
+
     $fecha=$_GET['fecha_reserva'];
-    $hora=$_GET['hora'];
+    $horainicial=$_GET['horainicial'];
+
     $nombre=$_GET['nombre'];
 
-    /*
+/*
     echo $id_mesa;
     echo "<br>";
     echo $id_reserva;
@@ -33,7 +40,7 @@ include '../../services/conexion.php';
     echo $hora;
     echo "<br>";
     echo $nombre;
-    */
+*/
 
 
 echo "<div class='paddingtop'>";
@@ -41,16 +48,35 @@ echo "<div class='paddingtop'>";
         echo "<a class='btnlogout' href='../../processes/logout.php'>Log Out</a>";
 echo "</div>";
 //die;
-echo "<br>";
+echo "<br><br>";
+echo "<h2><b>Administrar mesas</b></h2>";
 
 echo "<div class='filtrado'>";
     echo "<form action='modificar.reserva.php?id_mesa={$id_mesa}&id_reserva={$id_reserva}' method='POST'>";
         echo "<p>Fecha: <input type='date' name='fecha' size='60' value='{$fecha}' required></p>";
-        echo "<p>Hora: <input type='time' name='hora' size='40' value='{$hora}' required></p>";
+        echo "Hora: <select name='hora'>";
+                    echo "<option value='$horainicial' selected>$horainicial</option>";
+                    echo "<option value='10:00:00'>10:00:00</option>";
+                    echo "<option value='11:00:00'>11:00:00</option>";
+                    echo "<option value='12:00:00'>12:00:00</option>";
+                    echo "<option value='13:00:00'>13:00:00</option>";
+                    echo "<option value='14:00:00'>14:00:00</option>";
+                    echo "<option value='15:00:00'>15:00:00</option>";
+                    echo "<option value='16:00:00'>16:00:00</option>";
+                    echo "<option value='17:00:00'>17:00:00</option>";
+                    echo "<option value='18:00:00'>18:00:00</option>";
+                    echo "<option value='19:00:00'>19:00:00</option>";
+                    echo "<option value='20:00:00'>20:00:00</option>";
+              echo "</select>";
+        //<p><input type='time' name='hora' size='40' value='{$horainicial}' required></p>
         echo "<p>Nombre Reserva: <input type='text' name='nombre' size='40' value='{$nombre}' required></p>";
         echo "<input type='submit' value='Enviar'>";
     echo "</form>";
 echo "</div>";
+
+}else{
+    header("Location:../index.php");
+}
 ?>
 
 </body>
