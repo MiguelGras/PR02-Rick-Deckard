@@ -19,6 +19,8 @@
 
         session_start();
         if(!empty($_SESSION['email'])){
+
+            
     ?>
 <div class='paddingtop'>
         <a class='btnhistorial' href='../../view/admin/vistaadmin.php'>Atras</a>

@@ -32,7 +32,7 @@ echo "<h2><b>Administrar mesas</b></h2>";
 echo"<br>";
 echo"<div class='filtrado'>";
     echo"<form action='insertar.reserva.php?id_mesa=$id_mesa' method='POST'>";
-        echo"<p>Fecha: <input type='date' name='fecha' size='60' required></p>";
+        echo"<p>Fecha: <input type='date' name='fecha' size='60' min='curdate('Y-m-d')' required></p>";
         echo"<p>Hora: <input type='time' name='horainicial' size='40' required></p>";
         echo"<p>Nombre Reserva: <input type='text' name='nombre' size='40' required></p>";
         echo"<input type='submit' value='Enviar'>";
