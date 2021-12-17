@@ -17,7 +17,12 @@
 
 include '../../services/config.php';
 include '../../services/conexion.php';
+
+session_start();
+if(!empty($_SESSION['email'])){
+    
     $id_usuario=$_GET['id_usuario'];
+    $tipo_usuario=$_GET['tipo_usuario'];
     $nombre=$_GET['nombre_usuario'];
     $apellido=$_GET['apellido_usuario'];
     $email=$_GET['email_usuario'];
@@ -39,13 +44,14 @@ include '../../services/conexion.php';
 
 ?>
 <div class='paddingtop'>
-        <a class='btnhistorial' href='../../view/admin/administradores.php'>Atras</a>
+<a class='btnhistorial' href='../../view/admin/administradores.php'>Administradores</a>
+        <a class='btnhistorial' href='../../view/admin/camareros.php'>Camareros</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
     <br>
 <?php
 echo "<div class='filtrado'>";
-    echo "<form action='modificar.admin.php?id_usuario={$id_usuario}' method='POST'>";
+    echo "<form action='modificar.usuario.php?id_usuario={$id_usuario}&tipo_usuario={$tipo_usuario}' method='POST'>";
         echo "<p>Nombre: <input type='text' name='nombre' size='60' value='{$nombre}' required></p>";
         echo "<p>Apellido: <input type='text' name='apellido' size='40' value='{$apellido}' required></p>";
         echo "<p>Email: <input type='email' name='email' size='40' value='{$email}' required></p>";
@@ -54,6 +60,10 @@ echo "<div class='filtrado'>";
         echo "<input type='submit' value='Enviar'>";
     echo "</form>";
 echo "</div>";
+
+}else{
+    header("Location:../index.php");
+}
 ?>
 
 </body>

@@ -14,20 +14,24 @@
 
 <body>
 <?php 
-
+        
 include '../../services/config.php';
 include '../../services/conexion.php';
-    $capacidad=$_GET['capacidad_mesa'];
-    $ubicacion=$_GET['ubicacion_mesa'];
-    $id_mesa=$_GET['id_mesa'];
-    //echo $ubicacion;
+    session_start();
+    if(!empty($_SESSION['email'])){
+    
+        $capacidad=$_GET['capacidad_mesa'];
+        $ubicacion=$_GET['ubicacion_mesa'];
+        $id_mesa=$_GET['id_mesa'];
+        //echo $ubicacion;
 
 ?>
 <div class='paddingtop'>
         <a class='btnhistorial' href='../../view/admin/vistaadmin.php'>Atras</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
-    <br>
+    <br><br>
+<h2><b>Administrar mesas</b></h2>
 <?php
 echo "<div class='filtrado'>";
     echo "<form action='modificar.mesa.php?id_mesa={$id_mesa}' method='POST'>";
@@ -36,6 +40,10 @@ echo "<div class='filtrado'>";
         echo "<input type='submit' value='Enviar'>";
     echo "</form>";
 echo "</div>";
+
+}else{
+    header("Location:../index.php");
+}
 ?>
 
 </body>

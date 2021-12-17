@@ -24,6 +24,9 @@
     include '../../view/ver.php';
     include '../../services/conexion.php';
 
+session_start();
+if(!empty($_SESSION['email'])){
+
     $tipousu=$pdo->prepare("SELECT DISTINCT tipo_usuario FROM tbl_usuarios");
     $tipousu->execute();
     $listaTipousu=$tipousu->fetchAll(PDO::FETCH_ASSOC);
@@ -47,6 +50,10 @@
         <input type="submit" value="Enviar">
     </form>
 </div>
-
+<?php
+}else{
+    header("Location:../index.php");
+}
+?>
 </body>
 </body>

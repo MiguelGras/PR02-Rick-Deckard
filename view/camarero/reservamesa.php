@@ -12,7 +12,9 @@
 </head>
 <body>
 <div class='paddingtop'>
-    <a class='btnhistorial' href='../../view/camarero/vistacamarero.php'>Atras</a>
+    <a class='btnhistorial' href='../../view/camarero/comedor.php'>Comedor</a>
+    <a class='btnhistorial' href='../../view/camarero/terraza.php'>Terraza</a>
+    <a class='btnhistorial' href='../../view/camarero/sala_Privada.php'>Sala Privada</a>
     <a class='btnlogout' href="../../processes/logout.php">Log Out</a>
 </div>
 
@@ -158,14 +160,14 @@ echo "</tr>";
             echo "<td>{$reserva['hora_fin_reserva']}</td>";
             echo "<td>{$reserva['nombre_reserva']}</td>";
             echo "<td>{$reserva['id_mesa']}</td>";
-            echo "<td><a href='../../processes/camarero/formulario.modificarreserva.php?id_mesa={$reserva['id_mesa']}&id_reserva={$reserva['id_reserva']}&fecha_reserva={$reserva['fecha_reserva']}&hora={$reserva['hora_inicio_reserva']}&nombre={$reserva['nombre_reserva']}' class='btnquitar'>Modificar reserva</a></td>";
+            echo "<td><a href='../../processes/camarero/formulario.modificarreserva.php?id_mesa={$reserva['id_mesa']}&id_reserva={$reserva['id_reserva']}&fecha_reserva={$reserva['fecha_reserva']}&horainicial={$reserva['hora_inicio_reserva']}&horafin={$reserva['hora_fin_reserva']}&nombre={$reserva['nombre_reserva']}' class='btnquitar'>Modificar reserva</a></td>";
             echo "<td><a href='../../processes/camarero/eliminar.reserva.php?id_mesa={$reserva['id_mesa']}&id_reserva={$reserva['id_reserva']}' class='btnquitar'>Eliminar reserva</a></td>";
             echo '</tr>';
         }
-    }
-/*}else{
+    
+}else{
     header("Location:../index.php");
-}*/
+}
 ?>
 </body>
 </html>

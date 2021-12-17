@@ -3,33 +3,39 @@
 include '../../services/config.php';
 include '../../services/conexion.php';
 
-$id_usuario=$_GET['id_usuario'];
-$nombre=$_POST['nombre'];
-$apellido=$_POST['apellido'];
-$email=$_POST['email'];
-$telf=$_POST['telf'];
-$contra=$_POST['contra'];
+    $id_mesa=$_GET['id_mesa'];
+    $id_reserva=$_GET['id_reserva'];
 
-    echo $id_usuario;
+    $fecha=$_POST['fecha'];
+
+    $horainicial=$_POST['hora'];
+    $horafin= strtotime ( "2 hours" , strtotime ( $horainicial ) ) ;
+    $horafinal= date ('H:i' , $horafin);
+
+    $nombre=$_POST['nombre'];
+/*
+    echo $id_mesa;
+    echo "<br>";
+    echo $id_reserva;
+    echo "<br>";
+    echo $fecha;
+    echo "<br>";
+    echo $horainicial;
+    echo "<br>";
+    echo $horafinal;
     echo "<br>";
     echo $nombre;
-    echo "<br>";
-    echo $apellido;
-    echo "<br>";
-    echo $telf;
-    echo "<br>";
-    echo $contra;
     die;
-
-$insert = $pdo->prepare("UPDATE tbl_camareros SET id_usuario='{$id_usuario}', nombre_usuario='{$nombre}', apellido_usuario='{$apellido}', email_usuario='{$email}', contra_usuario=MD5('{$contra}'), telf_usuario='{$telf}' WHERE id_usuario='{$id_usuario}'");
-/*print_r($insert);
+*/
+$update = $pdo->prepare("UPDATE tbl_reservas SET id_reserva='{$id_reserva}', fecha_reserva='{$fecha}', hora_inicio_reserva='{$horainicial}', hora_fin_reserva='{$horafinal}', nombre_reserva='{$nombre}', id_mesa='{$id_mesa}' WHERE id_reserva='{$id_reserva}'");
+/*print_r($update);
 die;*/
 try{
-    $insert-> execute();
-    if(!empty($insert)){
-        header("location:../../view/admin/camareros.php");
+    $update-> execute();
+    if(!empty($update)){
+        header("location:../../view/camarero/reservamesa.php?id_mesa=$id_mesa");
     }else{
-        echo '<script language="javascript">alert("No se ha podido introducir el camarero");</script>';
+        echo '<script language="javascript">alert("No se ha podido introducir la reserva");</script>';
     }
 }catch(PDOException $e){
     echo 'mal';

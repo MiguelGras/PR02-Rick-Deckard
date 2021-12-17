@@ -13,10 +13,18 @@
 </head>
 
 <body>
+    <?php
+        include '../../view/ver.php';
+        include '../../services/conexion.php';
+
+        session_start();
+        if(!empty($_SESSION['email'])){
+    ?>
 <div class='paddingtop'>
         <a class='btnhistorial' href='../../view/admin/vistaadmin.php'>Atras</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
+<h2><b>Administrar mesas</b></h2>
     <br>
     <div class="filtrado">
     <form action="insertar.mesa.php" method="POST">
@@ -25,6 +33,10 @@
         <input type="submit" value="Enviar">
     </form>
     </div>
-
+    <?php
+        }else{
+            header("Location:../index.php");
+        }
+    ?>
 </body>
-</body>
+</html>
