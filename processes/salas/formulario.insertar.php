@@ -28,27 +28,9 @@
 </div>
 <h2><b>Administrar mesas</b></h2>
 <?php
-/*------------------
-$ubicacionsql=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
-$ubicacionsql->execute();
-$listaUbicacion=$ubicacionsql->fetchAll(PDO::FETCH_ASSOC);
-*///------------------
-$salassql=$pdo->prepare("SELECT nombre_sala FROM tbl_salas");
-$salassql->execute();
-$listaSalas=$salassql->fetchAll(PDO::FETCH_ASSOC);
-//------------------
 echo "<div class='filtrado'>";
-    echo "<form action='insertar.mesa.php?id_mesa' method='POST'>";
-        echo "<p>Capacidad: <input type='number' name='capacidad' size='60'></p>";
-        //echo "<p>Ubicacion: <input type='text' name='ubicacion' size='40' value='{$ubicacion}'></p>";
-        echo "<p>Ubicacion: <select name='ubicacion'>";
-        echo "<option value='$ubicacion'>$ubicacion</option>";
-            $contador=0;
-            foreach($listaSalas as $salassql){
-                $contador++;
-                echo "<option value='".$salassql['nombre_sala']."'>".$contador.".-".$salassql['nombre_sala']."</option>";
-            }
-        echo "</select></p>";
+    echo "<form action='insertar.sala.php' method='POST'>";
+        echo "<p>Nombre de la sala: <input type='text' name='nombre' size='60'></p>";
         echo "<input type='submit' value='Enviar'>";
     echo "</form>";
 echo "</div>";

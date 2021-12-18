@@ -49,9 +49,15 @@ if(!empty($_SESSION['email'])){
 
 <?php
     echo "<h2><b>Administrar mesas</b></h2>";
+    /*-------------------
     $ubicacion=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
     $ubicacion->execute();
     $listaUbicacion=$ubicacion->fetchAll(PDO::FETCH_ASSOC);
+    *///-------------------
+    $salassql=$pdo->prepare("SELECT nombre_sala FROM tbl_salas");
+    $salassql->execute();
+    $listaSalas=$salassql->fetchAll(PDO::FETCH_ASSOC);
+    //-------------------
 ?>
 <center><div class="table-centrada">
     <a href='camareros.php' class='btnhistorial'>Camareros</a>
@@ -66,8 +72,8 @@ if(!empty($_SESSION['email'])){
         <?php
         echo "<select name='ubicacion_mesa'>";
         echo "<option value='%%'>Ubicación</option>";
-            foreach($listaUbicacion as $ubicacion){
-                echo "<option value='".$ubicacion['ubicacion_mesa']."'>".$ubicacion['ubicacion_mesa']."</option>";
+            foreach($listaSalas as $salas){
+                echo "<option value='".$salas['nombre_sala']."'>".$salas['nombre_sala']."</option>";
             }
         echo "</select>";
         ?>
@@ -79,6 +85,7 @@ if(!empty($_SESSION['email'])){
 <div class='centradotd'>
 <?php
 echo"<td><a href='../../processes/mesas/formulario.insertar.php' class='btnhistorial'>Crear mesa</a></td>";
+echo"<td><a href='../../processes/salas/formulario.insertar.php' class='btnhistorial'>Crear sala</a></td>";
 ?>
 </div>
 
@@ -115,7 +122,7 @@ if(isset($_POST['filtrar'])){
     //Filtrar solo por capacidad    
     }elseif(empty($ubicacion=$_POST['ubicacion_mesa'])){
             //------------    
-            $select=$pdo->prepare("SELECT * FROM tbl_mesas");
+            $select=$pdo->prepare("SELECT * FROM tbl_mesas ORDER BY ubicacion_mesa DESC");
             //$select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa>='{$capacidad}' order by capacidad_mesa DESC");
             $select->execute();
             $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
@@ -129,7 +136,6 @@ if(isset($_POST['filtrar'])){
                 echo"<td><a href='../../processes/mesas/eliminar.mesa.php?id_mesa={$filtro['id_mesa']}' class='btnquitar'>Eliminar mesa</a></td>";
                 echo '</tr>';
             }
-    //Filtrar teniendo los 2 parametros
     }
     //Filtrar sin añadir parametros
     }else{

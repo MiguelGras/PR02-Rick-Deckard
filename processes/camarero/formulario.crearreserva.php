@@ -21,20 +21,37 @@ session_start();
 if(!empty($_SESSION['email'])){
 
 $id_mesa=$_GET['id_mesa'];
+$fechasistema=date('Y-m-d');
+
 
 echo "<div class='paddingtop'>";
         echo "<a class='btnhistorial' href='../../view/camarero/reservamesa.php?id_mesa=$id_mesa'>Atras</a>";
         echo "<a class='btnlogout' href='../../processes/logout.php'>Log Out</a>";
-echo "</div>";
-echo "<br><br>";
-echo "<h2><b>Administrar mesas</b></h2>";
+echo"</div>";
+?>
+<br><br>
+<h2><b>Administrar mesas</b></h2>
 
-echo"<br>";
-echo"<div class='filtrado'>";
+<br>
+<div class='filtrado'>
+    <?php
     echo"<form action='insertar.reserva.php?id_mesa=$id_mesa' method='POST'>";
-        echo"<p>Fecha: <input type='date' name='fecha' size='60' min='curdate('Y-m-d')' required></p>";
-        echo"<p>Hora: <input type='time' name='horainicial' size='40' required></p>";
-        echo"<p>Nombre Reserva: <input type='text' name='nombre' size='40' required></p>";
+            echo"<p>Fecha: <input type='date' name='fecha' size='60' min=$fechasistema required></p>";
+            echo"<p>Hora: <select name='horainicial' required>";
+                    echo" <option value=''></option>";
+                    echo" <option value='10:00:00'>10:00:00</option>";
+                    echo"<option value='11:00:00'>11:00:00</option>";
+                    echo"<option value='12:00:00'>12:00:00</option>";
+                    echo"<option value='13:00:00'>13:00:00</option>";
+                    echo"<option value='14:00:00'>14:00:00</option>";
+                    echo"<option value='15:00:00'>15:00:00</option>";
+                    echo"<option value='16:00:00'>16:00:00</option>";
+                    echo"<option value='17:00:00'>17:00:00</option>";
+                    echo"<option value='18:00:00'>18:00:00</option>";
+                    echo"<option value='19:00:00'>19:00:00</option>";
+                    echo"<option value='20:00:00'>20:00:00</option>";
+                echo"</select></p>";
+            echo"<p>Nombre Reserva: <input type='text' name='nombre' size='40' required></p>";
         echo"<input type='submit' value='Enviar'>";
     echo"</form>";
 echo"</div>";

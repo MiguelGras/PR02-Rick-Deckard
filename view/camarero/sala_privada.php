@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class='paddingtop'>
+        <a class='btnhistorial' href="terraza.php">Terraza</a>
         <a class='btnhistorial' href="comedor.php">Comedor</a>
-        <a class='btnhistorial' href="sala_privada.php">Sala Privada</a>
     <a class='btnlogout' href="../../processes/logout.php">Log Out</a>
 </div>
 
@@ -51,14 +51,13 @@ if(!empty($_SESSION['email'])){
 
 <?php
     echo "<h2><b>Administrar mesas</b></h2>";
-    $capacidad=$pdo->prepare("SELECT DISTINCT capacidad_mesa FROM tbl_mesas WHERE ubicacion_mesa='terraza'");
+    $capacidad=$pdo->prepare("SELECT DISTINCT capacidad_mesa FROM tbl_mesas WHERE ubicacion_mesa='Sala Privada'");
     $capacidad->execute();
     $listaCapacidad=$capacidad->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="filtrado">
-    <form action="terraza.php" method="post">
-        <!--<input class="filtradobtn2" type="text" placeholder="Capacidad mesa" name="capacidad_mesa">-->
+    <form action="comedor.php" method="post">
         <?php
         echo "<select name='capacidad_mesa'>";
         echo "<option value=''>Todo</option>";
@@ -80,32 +79,36 @@ echo "<table class='table'>";
 echo "<tr>";
 echo "<th>Nº Mesa</th>";
 echo "<th>Capacidad</th>";
-echo "<th>Sala</th>";
+echo "<th>Ubicación</th>";
 echo "<th>Reservar/Quitar reserva</th>";
 echo "</tr>";
+
 
 
 //Con filtro
 if(isset($_POST['filtrar'])){
     $capacidad=$_POST['capacidad_mesa'];
+    //Filtrar solo por ubicacion
     //------------
     if(empty($capacidad=$_POST['capacidad_mesa'])){
-    $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='terraza' ORDER BY capacidad_mesa DESC");
+    $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='Sala Privada' ORDER BY capacidad_mesa DESC");
     $select->execute();
     $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
+    //------------
+    
     //------------
     foreach ($listaFiltro as $filtro) {
         echo "<tr>";
             echo "<td><b>{$filtro['id_mesa']}</b></td>";
             echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
             echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo"<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
+            echo "<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
         echo '</tr>';
     }
     //Filtrar solo por capacidad    
     }elseif(!empty($capacidad=$_POST['capacidad_mesa'])){
             //------------
-            $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa=$capacidad and ubicacion_mesa='terraza' ORDER BY capacidad_mesa DESC");
+            $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa=$capacidad and ubicacion_mesa='Sala Privada' ORDER BY capacidad_mesa DESC");
             //$select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa>='{$capacidad}' order by capacidad_mesa DESC");
             $select->execute();
             $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
@@ -115,14 +118,14 @@ if(isset($_POST['filtrar'])){
                     echo "<td><b>{$filtro['id_mesa']}</b></td>";
                     echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
                     echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-                    echo"<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
+                    echo "<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
                 echo '</tr>';
             }
     }
     //Filtrar sin añadir parametros
     }else{
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='terraza' ORDER BY capacidad_mesa DESC");
+        $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='Sala Privada' ORDER BY capacidad_mesa DESC");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -131,7 +134,7 @@ if(isset($_POST['filtrar'])){
                 echo "<td><b>{$filtro['id_mesa']}</b></td>";
                 echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
                 echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-                echo"<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
+                echo "<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
             echo '</tr>';
         }
     }

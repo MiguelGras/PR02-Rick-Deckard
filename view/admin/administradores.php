@@ -38,6 +38,7 @@ session_start();
 
 
 if(!empty($_SESSION['email'])){
+$email=$_SESSION['email'];
 
 ?>
 <br>
@@ -85,7 +86,7 @@ if(isset($_POST['filtrar'])){
     //------------
     if(empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and apellido_usuario LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and apellido_usuario LIKE '%{$apellido}%' and email_usuario!='{$email}'");
         $select->execute();
         $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -102,7 +103,7 @@ if(isset($_POST['filtrar'])){
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%' and email_usuario!='{$email}'");
         $select->execute();
         $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -119,7 +120,7 @@ if(isset($_POST['filtrar'])){
         }
     }elseif(!empty($nombre=$_POST['nombre_usuario']) && !empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%' and email_usuario!='{$email}'");
         $select->execute();
         $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -136,7 +137,7 @@ if(isset($_POST['filtrar'])){
         }
     }elseif(empty($nombre=$_POST['nombre_usuario']) && empty($apellido=$_POST['apellido_usuario'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and nombre_usuario LIKE '%{$nombre}%' and apellido_usuario LIKE '%{$apellido}%' and email_usuario!='{$email}'");
         $select->execute();
         $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
@@ -155,7 +156,7 @@ if(isset($_POST['filtrar'])){
 
     }else{
         //-------------------
-        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin'");
+        $select=$pdo->prepare("SELECT * FROM tbl_usuarios WHERE tipo_usuario='admin' and email_usuario!='{$email}'");
         $select->execute();
         $listaUsuarios=$select->fetchAll(PDO::FETCH_ASSOC);
         //-------------------
