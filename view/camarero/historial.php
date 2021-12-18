@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial Proyecto RICK-DECKARD21</title>
-
-    <link rel="stylesheet" type="text/css" href="../css/historial.css">
+    <link rel="stylesheet" type="text/css" href="../../css/vista.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../js/modalbox.js"></script>
+    <script src="../../js/vista.js"></script>
+    <title>Vista Proyecto RICK-DECKARD21</title>
 </head>
 <body>
-<a href="../view/vista.php"><img src="../img/cumback2.png" class="cum"></a>    
+<div class='paddingtop'>
+    <a class='btnhistorial' href="comedor.php">Comedor</a>
+    <a class='btnhistorial' href="terraza.php">Terraza</a>
+    <a class='btnhistorial' href="sala_privada.php">Sala Privada</a>
+    <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
+</div>  
 <br>
-    <div>
-        <h1 class="queso">Historial</h1>
 
-    </div>
 <?php
-include 'ver.php';
-include '../services/conexion.php';
+include '../../view/ver.php';
+include '../../services/conexion.php';
 
 session_start();
 
@@ -25,21 +29,24 @@ if(!empty($_SESSION['email'])){
 
 ?>
 <br>
+<marquee behavior="scroll" direction="right" scrolldelay="1">Bienvenido <?php echo $_SESSION['email']; ?></marquee>
+<br>
 
 <?php
-    $ubicacion=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
-    $ubicacion->execute();
-    $listaUbicacion=$ubicacion->fetchAll(PDO::FETCH_ASSOC);
+    echo "<h2><b>Historial Reservas</b></h2>";
+    $sala=$pdo->prepare("SELECT DISTINCT nombre_sala FROM tbl_salas");
+    $sala->execute();
+    $listaSala=$sala->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="filtrado">
     <form action="historial.php" method="post">
         <input class="filtradobtn2" type="text" placeholder="Capacidad mesa" name="capacidad_mesa">
         <?php
-        echo "<select name='ubicacion_mesa'>";
-        echo "<option value='%%'>Ubicación</option>";
-            foreach($listaUbicacion as $ubicacion){
-                echo "<option value='".$ubicacion['ubicacion_mesa']."'>".$ubicacion['ubicacion_mesa']."</option>";
+        echo "<select name='nombre_sala'>";
+        echo "<option value='%%'>Todo</option>";
+            foreach($listaSala as $sala){
+                echo "<option value='".$sala['nombre_sala']."'>".$sala['nombre_sala']."</option>";
             }
         echo "</select>";
         ?>
@@ -53,13 +60,12 @@ echo "<br>";
 echo "<div class='table-centrada'>";
 echo "<table class='table'>";
 echo "<tr>";
-echo "<th>Id historial</th>";
-echo "<th>Nº mesa</th>";
-echo "<th>Capacidad</th>";
-echo "<th>Ubicación</th>";
-echo "<th>Fecha de inicio</th>";
-echo "<th>Fecha de fin</th>";
-echo "<th>Reservado por</th>";
+echo "<th>Nº Reserva</th>";
+echo "<th>Fecha reserva</th>";
+echo "<th>Inicio de la reserva</th>";
+echo "<th>Fin de la reserva</th>";
+echo "<th>Nombre Reserva</th>";
+echo "<th>Nª Mesa</th>";
 echo "</tr>";
 
 //Con filtro
@@ -126,23 +132,21 @@ if(isset($_POST['filtrar'])){
     //Filtrar sin aÃ±adir parametros
     }else{
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_historial");
+        $select=$pdo->prepare("SELECT * FROM tbl_reservas");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
         foreach ($listaFiltro as $filtro) {
             echo "<tr>";
-            echo "<td><b>{$filtro['id_historial']}</b></td>";
+            echo "<td><b>{$filtro['id_reserva']}</b></td>";
+            echo "<td>{$filtro['fecha_reserva']}</td>";
+            echo "<td>{$filtro['hora_inicio_reserva']}</td>";
+            echo "<td>{$filtro['hora_fin_reserva']}</td>";
+            echo "<td>{$filtro['nombre_reserva']}</td>";
             echo "<td>{$filtro['id_mesa']}</td>";
-            echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-            echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo "<td>{$filtro['inicio_reserva']}</td>";
-            echo "<td>{$filtro['fin_reserva']}</td>";
-            echo "<td>{$filtro['email_usuario']}</td>";
             echo '</tr>';
         }
     }
-
 }else{
     header("Location:../index.php");
 }

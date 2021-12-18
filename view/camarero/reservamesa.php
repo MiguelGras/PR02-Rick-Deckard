@@ -49,7 +49,7 @@ if(!empty($_SESSION['email'])){
     <a href='vista.php'>Vista mesas</a>
 </div>-->
 <?php
-    echo "<h2><b>Administrar mesas</b></h2>";
+    echo "<h2><b>Administrar reservas</b></h2>";
     $ubicacion=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
     $ubicacion->execute();
     $listaUbicacion=$ubicacion->fetchAll(PDO::FETCH_ASSOC);

@@ -49,35 +49,30 @@ if(!empty($_SESSION['email'])){
 <marquee behavior="scroll" direction="right" scrolldelay="1">Bienvenido <?php echo $_SESSION['email']; ?></marquee>
 <br>
 
-<!--<div class="table-centrada">
-    <a href='camareros.php'>Camareros</a>
-    <a href='administradores.php'>Administradores</a>
-    <a href='vista.php'>Vista mesas</a>
-</div>-->
 <?php
     echo "<h2><b>Administrar mesas</b></h2>";
-    $ubicacion=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
-    $ubicacion->execute();
-    $listaUbicacion=$ubicacion->fetchAll(PDO::FETCH_ASSOC);
+    $capacidad=$pdo->prepare("SELECT DISTINCT capacidad_mesa FROM tbl_mesas WHERE ubicacion_mesa='comedor'");
+    $capacidad->execute();
+    $listaCapacidad=$capacidad->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="filtrado">
     <form action="comedor.php" method="post">
-        <input class="filtradobtn2" type="text" placeholder="Capacidad mesa" name="capacidad_mesa">
+        <!--<input class="filtradobtn2" type="text" placeholder="Capacidad mesa" name="capacidad_mesa">-->
         <?php
-        /*echo "<select name='ubicacion_mesa'>";
-        echo "<option value='%%'>Ubicación</option>";
-            foreach($listaUbicacion as $ubicacion){
-                echo "<option value='".$ubicacion['ubicacion_mesa']."'>".$ubicacion['ubicacion_mesa']."</option>";
+        echo "<select name='capacidad_mesa'>";
+        echo "<option value=''>Todo</option>";
+            foreach($listaCapacidad as $capacidad){
+                echo "<option value='".$capacidad['capacidad_mesa']."'>".$capacidad['capacidad_mesa']."</option>";
             }
-        echo "</select>";*/
+        echo "</select>";
         ?>
         <input class="filtradobtn" type="submit" value="Filtrar" name="filtrar">
     </form>
 </div>
 <?php
 echo "<div class='centradotd'";
-echo"<td><a href='../../view/historial.php' class='btnhistorial'>Historial</a></td>";
+echo"<td><a href='../../view/camarero/historial.php' class='btnhistorial'>Historial</a></td>";
 echo "</div>";
 
 echo "<div class='table-centrada'>";
@@ -85,20 +80,15 @@ echo "<table class='table'>";
 echo "<tr>";
 echo "<th>Nº Mesa</th>";
 echo "<th>Capacidad</th>";
-echo "<th>Ubicación</th>";
-//echo "<th>Inicio de la reserva</th>";
-//echo "<th>Fin de la reserva</th>"; //comentar
-//echo "<th>Reservado por </th>";
+echo "<th>Sala</th>";
 echo "<th>Reservar/Quitar reserva</th>";
 echo "</tr>";
+
 
 
 //Con filtro
 if(isset($_POST['filtrar'])){
     $capacidad=$_POST['capacidad_mesa'];
-    //$ubicacion=$_POST['ubicacion_mesa'];
-    //var_dump($capacidad);
-    //var_dump($ubicacion);
     //Filtrar solo por ubicacion
     //------------
     if(empty($capacidad=$_POST['capacidad_mesa'])){
@@ -106,19 +96,14 @@ if(isset($_POST['filtrar'])){
     $select->execute();
     $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
     //------------
+
+    //------------
     foreach ($listaFiltro as $filtro) {
         echo "<tr>";
-        echo "<td><b>{$filtro['id_mesa']}</b></td>";
-        echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-        echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-        //echo "<td>{$filtro['inicio_reserva']}</td>";
-        //echo "<td>{$filtro['email_usuario']}</td>";
-        //if ($filtro['inicio_reserva']=$filtro['inicio_reserva']) {
-            //echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
-        //}else {
-            echo"<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
-            //../../processes/mesas/
-        //}
+            echo "<td><b>{$filtro['id_mesa']}</b></td>";
+            echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
+            echo "<td>{$filtro['ubicacion_mesa']}</td>";  
+            echo "<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
         echo '</tr>';
     }
     //Filtrar solo por capacidad    
@@ -131,15 +116,10 @@ if(isset($_POST['filtrar'])){
             //------------
             foreach ($listaFiltro as $filtro) {
                 echo "<tr>";
-                echo "<td><b>{$filtro['id_mesa']}</b></td>";
-                echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-                echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-                //echo "<td>{$filtro['inicio_reserva']}</td>";
-                //echo "<td>{$filtro['email_usuario']}</td>";
-                //if ($filtro['inicio_reserva']=$filtro['inicio_reserva']) {
-                    //echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
-                //}else {
-                    echo"<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";                //}
+                    echo "<td><b>{$filtro['id_mesa']}</b></td>";
+                    echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
+                    echo "<td>{$filtro['ubicacion_mesa']}</td>";  
+                    echo "<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
                 echo '</tr>';
             }
     }
@@ -152,15 +132,10 @@ if(isset($_POST['filtrar'])){
         //------------
         foreach ($listaFiltro as $filtro) {
             echo "<tr>";
-            echo "<td><b>{$filtro['id_mesa']}</b></td>";
-            echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-            echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            //echo "<td>{$filtro['inicio_reserva']}</td>";
-            //echo "<td>{$filtro['email_usuario']}</td>";
-            //if ($filtro['inicio_reserva']=$filtro['inicio_reserva']) {
-                //echo"<td><a href='../processes/eliminar.php?id_mesa={$filtro['id_mesa']}&email_usuario={$_SESSION['email']}&capacidad_mesa={$filtro['capacidad_mesa']}&ubicacion_mesa={$filtro['ubicacion_mesa']}' class='btnquitar'>Quitar reserva</a></td>";
-            //}else {
-                echo"<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";            //}
+                echo "<td><b>{$filtro['id_mesa']}</b></td>";
+                echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
+                echo "<td>{$filtro['ubicacion_mesa']}</td>";  
+                echo "<td><a href='reservamesa.php?id_mesa={$filtro['id_mesa']}' class='btnreservar'>Detalles</a></td>";
             echo '</tr>';
         }
     }

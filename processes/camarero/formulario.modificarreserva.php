@@ -30,6 +30,8 @@ if(!empty($_SESSION['email'])){
 
     $nombre=$_GET['nombre'];
 
+    $fechasistema=date('Y-m-d');
+
 /*
     echo $id_mesa;
     echo "<br>";
@@ -52,8 +54,8 @@ echo "<br><br>";
 echo "<h2><b>Administrar mesas</b></h2>";
 
 echo "<div class='filtrado'>";
-    echo "<form action='modificar.reserva.php?id_mesa={$id_mesa}&id_reserva={$id_reserva}' method='POST'>";
-        echo "<p>Fecha: <input type='date' name='fecha' size='60' value='{$fecha}' required></p>";
+    echo "<form action='modificar.reserva.php?id_mesa={$id_mesa}&id_reserva={$id_reserva}&fecha_reserva=$fecha&horainicial=$horainicial&nombre=$nombre' method='POST'>";
+        echo "<p>Fecha: <input type='date' name='fecha' size='60' value='{$fecha}' min=$fechasistema required></p>";
         echo "Hora: <select name='hora'>";
                     echo "<option value='$horainicial' selected>$horainicial</option>";
                     echo "<option value='10:00:00'>10:00:00</option>";
