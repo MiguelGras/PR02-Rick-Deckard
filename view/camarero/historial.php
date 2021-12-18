@@ -132,17 +132,17 @@ if(isset($_POST['filtrar'])){
     //Filtrar sin aÃ±adir parametros
     }else{
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_reservas");
+        $select=$pdo->prepare("SELECT * FROM tbl_historial");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
         foreach ($listaFiltro as $filtro) {
             echo "<tr>";
-            echo "<td><b>{$filtro['id_reserva']}</b></td>";
-            echo "<td>{$filtro['fecha_reserva']}</td>";
-            echo "<td>{$filtro['hora_inicio_reserva']}</td>";
-            echo "<td>{$filtro['hora_fin_reserva']}</td>";
-            echo "<td>{$filtro['nombre_reserva']}</td>";
+            echo "<td><b>{$filtro['id_historial']}</b></td>";
+            echo "<td>{$filtro['fecha_historial']}</td>";
+            echo "<td>{$filtro['hora_inicio_historial']}</td>";
+            echo "<td>{$filtro['hora_fin_historial']}</td>";
+            echo "<td>{$filtro['nombre_historial']}</td>";
             echo "<td>{$filtro['id_mesa']}</td>";
             echo '</tr>';
         }
