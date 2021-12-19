@@ -23,16 +23,20 @@
             
     ?>
 <div class='paddingtop'>
-        <a class='btnhistorial' href='../../view/admin/vistaadmin.php'>Atras</a>
+        <a class='btnhistorial' href='../../view/admin/salas.php'>Atras</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
-<h2><b>Administrar mesas</b></h2>
+<br><br>
+<h2><b>Insertar Sala</b></h2>
 <?php
-echo "<div class='filtrado'>";
-    echo "<form action='insertar.sala.php' method='POST'>";
-        echo "<p>Nombre de la sala: <input type='text' name='nombre' size='60'></p>";
-        echo "<input type='submit' value='Enviar'>";
-    echo "</form>";
+echo "<div>";
+    echo "<center>";
+        echo "<form action='insertar.sala.php' enctype='multipart/form-data'  method='POST'>";
+            echo "<p class='feedback-input'>Nombre de la sala: <input type='text' name='nombre' size='60'></p>";
+            echo "<p class='feedback-input'>Imagen evento: <input class='form-control' type='file' accept='image/*' name='file' id='' width='100%' required></p>";
+            echo "<input type='submit' value='Enviar' class='btnhistorial'>";
+        echo "</form>";
+    echo "</center>";
 echo "</div>";
 
 }else{

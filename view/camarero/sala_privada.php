@@ -51,13 +51,13 @@ if(!empty($_SESSION['email'])){
 
 <?php
     echo "<h2><b>Administrar mesas</b></h2>";
-    $capacidad=$pdo->prepare("SELECT DISTINCT capacidad_mesa FROM tbl_mesas WHERE ubicacion_mesa='Sala Privada'");
+    $capacidad=$pdo->prepare("SELECT DISTINCT capacidad_mesa FROM tbl_mesas WHERE ubicacion_mesa='Sala_Privada'");
     $capacidad->execute();
     $listaCapacidad=$capacidad->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="filtrado">
-    <form action="comedor.php" method="post">
+    <form action="sala_privada.php" method="post">
         <?php
         echo "<select name='capacidad_mesa'>";
         echo "<option value=''>Todo</option>";
@@ -91,7 +91,7 @@ if(isset($_POST['filtrar'])){
     //Filtrar solo por ubicacion
     //------------
     if(empty($capacidad=$_POST['capacidad_mesa'])){
-    $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='Sala Privada' ORDER BY capacidad_mesa DESC");
+    $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='Sala_Privada' ORDER BY capacidad_mesa DESC");
     $select->execute();
     $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
     //------------
@@ -108,7 +108,7 @@ if(isset($_POST['filtrar'])){
     //Filtrar solo por capacidad    
     }elseif(!empty($capacidad=$_POST['capacidad_mesa'])){
             //------------
-            $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa=$capacidad and ubicacion_mesa='Sala Privada' ORDER BY capacidad_mesa DESC");
+            $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa=$capacidad and ubicacion_mesa='Sala_Privada' ORDER BY capacidad_mesa DESC");
             //$select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa>='{$capacidad}' order by capacidad_mesa DESC");
             $select->execute();
             $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
@@ -125,7 +125,7 @@ if(isset($_POST['filtrar'])){
     //Filtrar sin añadir parametros
     }else{
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='Sala Privada' ORDER BY capacidad_mesa DESC");
+        $select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE ubicacion_mesa='Sala_Privada' ORDER BY capacidad_mesa DESC");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------

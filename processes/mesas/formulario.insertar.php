@@ -26,7 +26,8 @@
         <a class='btnhistorial' href='../../view/admin/vistaadmin.php'>Atras</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
-<h2><b>Administrar mesas</b></h2>
+<br><br>
+<h2><b>Insertar Mesa</b></h2>
 <?php
 /*------------------
 $ubicacionsql=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
@@ -39,19 +40,18 @@ $listaSalas=$salassql->fetchAll(PDO::FETCH_ASSOC);
 //------------------
 echo "<div>";
     echo "<center>";
-    echo "<form action='insertar.mesa.php?id_mesa' method='POST'>";
-        echo "<p class='feedback-input'>Capacidad: <input type='number' name='capacidad' size='60' required></p>";
-        //echo "<p>Ubicacion: <input type='text' name='ubicacion' size='40' value='{$ubicacion}'></p>";
-        echo "<p class='feedback-input'>Ubicacion: <select name='ubicacion' required>";
-        echo "<option value='$ubicacion'>$ubicacion</option>";
-            $contador=0;
-            foreach($listaSalas as $salassql){
-                $contador++;
-                echo "<option value='".$salassql['nombre_sala']."'>".$contador.".-".$salassql['nombre_sala']."</option>";
-            }
-        echo "</select></p>";
-        echo "<input type='submit' value='Enviar' class='btnhistorial'>";
-    echo "</form>";
+        echo "<form action='insertar.mesa.php?id_mesa' method='POST'>";
+            echo "<p class='feedback-input'>Capacidad: <input type='number' name='capacidad' size='60' required></p>";
+            echo "<p class='feedback-input'>Ubicacion: <select name='ubicacion' required>";
+            echo "<option value='$ubicacion'>$ubicacion</option>";
+                $contador=0;
+                foreach($listaSalas as $salassql){
+                    $contador++;
+                    echo "<option value='".$salassql['nombre_sala']."'>".$contador.".-".$salassql['nombre_sala']."</option>";
+                }
+            echo "</select></p>";
+            echo "<input type='submit' value='Enviar' class='btnhistorial'>";
+        echo "</form>";
     echo "</center>";
 echo "</div>";
 

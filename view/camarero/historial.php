@@ -26,6 +26,7 @@ include '../../services/conexion.php';
 session_start();
 
 if(!empty($_SESSION['email'])){
+    $email=$_SESSION['email'];
 
 ?>
 <br>
@@ -37,24 +38,41 @@ if(!empty($_SESSION['email'])){
     $sala=$pdo->prepare("SELECT DISTINCT nombre_sala FROM tbl_salas");
     $sala->execute();
     $listaSala=$sala->fetchAll(PDO::FETCH_ASSOC);
-?>
+    
+    $id_mesa=$pdo->prepare("SELECT DISTINCT id_mesa FROM tbl_historial ORDER BY id_mesa ASC");
+    $id_mesa->execute();
+    $listaMesas=$id_mesa->fetchAll(PDO::FETCH_ASSOC);
 
-<div class="filtrado">
-    <form action="historial.php" method="post">
-        <input class="filtradobtn2" type="text" placeholder="Capacidad mesa" name="capacidad_mesa">
-        <?php
-        echo "<select name='nombre_sala'>";
-        echo "<option value='%%'>Todo</option>";
-            foreach($listaSala as $sala){
-                echo "<option value='".$sala['nombre_sala']."'>".$sala['nombre_sala']."</option>";
+    $fechasistema=date('Y-m-d');
+
+echo "<div class='filtrado'>";  
+    echo"<form action='historial.php' method='POST'>";
+        echo"Fecha: <input type='date' name='fecha' size='60' min=$fechasistema>";
+        echo" Hora: <select name='horainicial'>";
+            echo" <option value=''></option>";
+            echo" <option value='10:00:00'>10:00:00</option>";
+            echo"<option value='11:00:00'>11:00:00</option>";
+            echo"<option value='12:00:00'>12:00:00</option>";
+            echo"<option value='13:00:00'>13:00:00</option>";
+            echo"<option value='14:00:00'>14:00:00</option>";
+            echo"<option value='15:00:00'>15:00:00</option>";
+            echo"<option value='16:00:00'>16:00:00</option>";
+            echo"<option value='17:00:00'>17:00:00</option>";
+            echo"<option value='18:00:00'>18:00:00</option>";
+            echo"<option value='19:00:00'>19:00:00</option>";
+            echo"<option value='20:00:00'>20:00:00</option>";
+        echo"</select>";
+        echo " Nª Mesa: <select name='id_mesa'>";
+        echo "<option value=''>Todo</option>";
+            foreach($listaMesas as $mesa){
+                echo "<option value='".$mesa['id_mesa']."'>".$mesa['id_mesa']."</option>";
             }
         echo "</select>";
-        ?>
-        <input class="filtradobtn" type="submit" value="Filtrar" name="filtrar">
-    </form>
-</div>
+        echo"<input type='submit' value='filtrar' name='filtrar'>";
+    echo"</form>";
+echo "</div>";
 
-<?php
+
 
 echo "<br>";
 echo "<div class='table-centrada'>";
@@ -70,69 +88,166 @@ echo "</tr>";
 
 //Con filtro
 if(isset($_POST['filtrar'])){
-    $capacidad=$_POST['capacidad_mesa'];
-    $ubicacion=$_POST['ubicacion_mesa'];
-    //var_dump($capacidad);
-    //var_dump($ubicacion);
-    //Filtrar solo por ubicacion
+    $fecha=$_POST['fecha'];
+    $hora=$_POST['horainicial'];
+    $id_mesa=$_POST['id_mesa'];
+/*  
+    echo $fecha;
+    echo "<br>";
+    echo $hora;
+    echo "<br>";
+    echo $id_mesa;
+    die;
+*/
+    //Filtro vacio
+    // 0 0 0
     //------------
-    if(empty($capacidad=$_POST['capacidad_mesa']) && !empty($ubicacion=$_POST['ubicacion_mesa'])){
-        $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE ubicacion_mesa LIKE '%{$ubicacion}%'");
+    if(empty($fecha=$_POST['fecha']) && empty($hora=$_POST['horainicial']) && empty($id_mesa=$_POST['id_mesa'])){
+        $select=$pdo->prepare("SELECT * FROM tbl_historial ORDER BY fecha_historial ASC");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
     //------------
     foreach ($listaFiltro as $filtro) {
+        echo "<tr>";
         echo "<td><b>{$filtro['id_historial']}</b></td>";
+        echo "<td>{$filtro['fecha_historial']}</td>";
+        echo "<td>{$filtro['hora_inicio_historial']}</td>";
+        echo "<td>{$filtro['hora_fin_historial']}</td>";
+        echo "<td>{$filtro['nombre_historial']}</td>";
         echo "<td>{$filtro['id_mesa']}</td>";
-        echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-        echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-        echo "<td>{$filtro['inicio_reserva']}</td>";
-        echo "<td>{$filtro['fin_reserva']}</td>";
-        echo "<td>{$filtro['email_usuario']}</td>";
         echo '</tr>';
-    }
-    //Filtrar solo por capacidad    
-    }elseif(!empty($capacidad=$_POST['capacidad_mesa']) && empty($ubicacion=$_POST['ubicacion_mesa'])){
+    }  
+    // Id_mesa
+    // 0 0 1  
+    }elseif(empty($fecha=$_POST['fecha']) && empty($hora=$_POST['horainicial']) && !empty($id_mesa=$_POST['id_mesa'])){
         //------------    
-        $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE capacidad_mesa>=$capacidad");
-        //$select=$pdo->prepare("SELECT * FROM tbl_mesas WHERE capacidad_mesa>='{$capacidad}' order by capacidad_mesa DESC");
+        $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE id_mesa=$id_mesa");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
         foreach ($listaFiltro as $filtro) {
             echo "<tr>";
             echo "<td><b>{$filtro['id_historial']}</b></td>";
+            echo "<td>{$filtro['fecha_historial']}</td>";
+            echo "<td>{$filtro['hora_inicio_historial']}</td>";
+            echo "<td>{$filtro['hora_fin_historial']}</td>";
+            echo "<td>{$filtro['nombre_historial']}</td>";
             echo "<td>{$filtro['id_mesa']}</td>";
-            echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-            echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo "<td>{$filtro['inicio_reserva']}</td>";
-            echo "<td>{$filtro['fin_reserva']}</td>";
-            echo "<td>{$filtro['email_usuario']}</td>";
             echo '</tr>';
         }
-    //Filtrar teniendo los 2 parametros
-    }elseif(!empty($capacidad=$_POST['capacidad_mesa']) && !empty($ubicacion=$_POST['ubicacion_mesa'])){
+    // Hora
+    // 0 1 0
+    }elseif(empty($fecha=$_POST['fecha']) && !empty($hora=$_POST['horainicial']) && empty($id_mesa=$_POST['id_mesa'])){
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE ubicacion_mesa LIKE '%{$ubicacion}%' and capacidad_mesa=$capacidad");
+        $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE hora_inicio_historial='{$hora}'");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------
         foreach ($listaFiltro as $filtro) {
             echo "<tr>";
             echo "<td><b>{$filtro['id_historial']}</b></td>";
+            echo "<td>{$filtro['fecha_historial']}</td>";
+            echo "<td>{$filtro['hora_inicio_historial']}</td>";
+            echo "<td>{$filtro['hora_fin_historial']}</td>";
+            echo "<td>{$filtro['nombre_historial']}</td>";
             echo "<td>{$filtro['id_mesa']}</td>";
-            echo "<td>{$filtro['capacidad_mesa']} sillas</td>";
-            echo "<td>{$filtro['ubicacion_mesa']}</td>";  
-            echo "<td>{$filtro['inicio_reserva']}</td>";
-            echo "<td>{$filtro['fin_reserva']}</td>";
-            echo "<td>{$filtro['email_usuario']}</td>";
             echo '</tr>';
         }
-    }
-    //Filtrar sin aÃ±adir parametros
+        // Hora + Id_mesa
+        // 0 1 1
+        }elseif(empty($fecha=$_POST['fecha']) && !empty($hora=$_POST['horainicial']) && !empty($id_mesa=$_POST['id_mesa'])){
+            //------------
+            $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE hora_inicio_historial='{$hora}' and id_mesa=$id_mesa");
+            $select->execute();
+            $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
+            //------------
+            foreach ($listaFiltro as $filtro) {
+                echo "<tr>";
+                echo "<td><b>{$filtro['id_historial']}</b></td>";
+                echo "<td>{$filtro['fecha_historial']}</td>";
+                echo "<td>{$filtro['hora_inicio_historial']}</td>";
+                echo "<td>{$filtro['hora_fin_historial']}</td>";
+                echo "<td>{$filtro['nombre_historial']}</td>";
+                echo "<td>{$filtro['id_mesa']}</td>";
+                echo '</tr>';
+            }
+        // Fecha
+        // 1 0 0
+        }elseif(!empty($fecha=$_POST['fecha']) && empty($hora=$_POST['horainicial']) && empty($id_mesa=$_POST['id_mesa'])){
+            //------------
+            $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE fecha_historial='{$fecha}'");
+            $select->execute();
+            $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
+            //------------
+            foreach ($listaFiltro as $filtro) {
+                echo "<tr>";
+                echo "<td><b>{$filtro['id_historial']}</b></td>";
+                echo "<td>{$filtro['fecha_historial']}</td>";
+                echo "<td>{$filtro['hora_inicio_historial']}</td>";
+                echo "<td>{$filtro['hora_fin_historial']}</td>";
+                echo "<td>{$filtro['nombre_historial']}</td>";
+                echo "<td>{$filtro['id_mesa']}</td>";
+                echo '</tr>';
+            }
+        // Fecha + Id_mesa
+        // 1 0 1
+        }elseif(!empty($fecha=$_POST['fecha']) && empty($hora=$_POST['horainicial']) && !empty($id_mesa=$_POST['id_mesa'])){
+            //------------
+            $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE fecha_historial='{$fecha}' and id_mesa=$id_mesa");
+            $select->execute();
+            $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
+            //------------
+            foreach ($listaFiltro as $filtro) {
+                echo "<tr>";
+                echo "<td><b>{$filtro['id_historial']}</b></td>";
+                echo "<td>{$filtro['fecha_historial']}</td>";
+                echo "<td>{$filtro['hora_inicio_historial']}</td>";
+                echo "<td>{$filtro['hora_fin_historial']}</td>";
+                echo "<td>{$filtro['nombre_historial']}</td>";
+                echo "<td>{$filtro['id_mesa']}</td>";
+                echo '</tr>';
+            }
+        // Fecha + Hora
+        // 1 1 0
+        }elseif(!empty($fecha=$_POST['fecha']) && !empty($hora=$_POST['horainicial']) && empty($id_mesa=$_POST['id_mesa'])){
+            //------------
+            $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE fecha_historial='{$fecha}' and hora_inicio_historial='{$hora}'");
+            $select->execute();
+            $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
+            //------------
+            foreach ($listaFiltro as $filtro) {
+                echo "<tr>";
+                echo "<td><b>{$filtro['id_historial']}</b></td>";
+                echo "<td>{$filtro['fecha_historial']}</td>";
+                echo "<td>{$filtro['hora_inicio_historial']}</td>";
+                echo "<td>{$filtro['hora_fin_historial']}</td>";
+                echo "<td>{$filtro['nombre_historial']}</td>";
+                echo "<td>{$filtro['id_mesa']}</td>";
+                echo '</tr>';
+            }
+        // Filtro lleno
+        // 1 1 1
+        }elseif(!empty($fecha=$_POST['fecha']) && !empty($hora=$_POST['horainicial']) && !empty($id_mesa=$_POST['id_mesa'])){
+            //------------
+            $select=$pdo->prepare("SELECT * FROM tbl_historial WHERE fecha_historial='{$fecha}' and hora_inicio_historial='{$hora}' and id_mesa=$id_mesa");
+            $select->execute();
+            $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
+            //------------
+            foreach ($listaFiltro as $filtro) {
+                echo "<tr>";
+                echo "<td><b>{$filtro['id_historial']}</b></td>";
+                echo "<td>{$filtro['fecha_historial']}</td>";
+                echo "<td>{$filtro['hora_inicio_historial']}</td>";
+                echo "<td>{$filtro['hora_fin_historial']}</td>";
+                echo "<td>{$filtro['nombre_historial']}</td>";
+                echo "<td>{$filtro['id_mesa']}</td>";
+                echo '</tr>';
+            }
+        }
+        //----------------
     }else{
         //------------
-        $select=$pdo->prepare("SELECT * FROM tbl_historial");
+        $select=$pdo->prepare("SELECT * FROM tbl_historial ORDER BY fecha_historial ASC");
         $select->execute();
         $listaFiltro=$select->fetchAll(PDO::FETCH_ASSOC);
         //------------

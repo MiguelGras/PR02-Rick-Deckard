@@ -2,6 +2,7 @@
 
 include '../../services/config.php';
 include '../../services/conexion.php';
+session_start();
 
 $fecha=$_POST['fecha'];
 $horainicial=$_POST['horainicial'];
@@ -43,7 +44,9 @@ if ($fechasistema == $fecha) {
                     </script>");
             }elseif(empty($listaReservas)){
                 $insert = $pdo->prepare("INSERT INTO tbl_reservas (id_reserva,fecha_reserva,hora_inicio_reserva,hora_fin_reserva,nombre_reserva,id_mesa) VALUES (NULL,'{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
-                $inserthist = $pdo->prepare("INSERT INTO tbl_historial (id_historial,fecha_historial,hora_inicio_historial,hora_fin_historial,nombre_historial,id_mesa) VALUES (NULL,'{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
+                $inserthist = $pdo->prepare("INSERT INTO tbl_historial (id_historial,camarero_historial,fecha_historial,hora_inicio_historial,hora_fin_historial,nombre_historial,id_mesa) VALUES (NULL,'{$email}','{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
+                print_r($inserthist);
+                die;
                 try{
                     $insert-> execute();
                     $inserthist->execute();

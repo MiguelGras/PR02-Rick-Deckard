@@ -18,8 +18,8 @@
         <a class='btnhistorial' href='../../view/admin/camareros.php'>Camareros</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
-    <br>
-
+    <br><br>
+    <h2><b>Insertar Usuario</b></h2>
 <?php
     include '../../view/ver.php';
     include '../../services/conexion.php';
@@ -31,24 +31,26 @@ if(!empty($_SESSION['email'])){
     $tipousu->execute();
     $listaTipousu=$tipousu->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<div class="filtrado">
-    <form action="insertar.usuario.php" method="POST">
-        <p>Nombre: <input type="text" name="nombre" size="60" required></p>
-        <p>Apellido: <input type="text" name="apellido" size="40" required></p>
-        <p>Tipo de usuario: <select name='tipo' required></p>
-            <option></option>
-        <?php     
-        foreach($listaTipousu as $tipousu){
-                echo "<option value='".$tipousu['tipo_usuario']."'>".$tipousu['tipo_usuario']."</option>";
-            }
-        ?>
-        </select>
-        
-        <p>Email: <input type="email" name="email" size="40" required></p>
-        <p>Telefono: <input type="number" name="telf" size="40" required></p>
-        <p>Contraseña: <input type="text" name="contra" size="40" required></p>
-        <input type="submit" value="Enviar">
-    </form>
+<div>
+    <center>
+        <form action="insertar.usuario.php" method="POST">
+            <p class="feedback-input">Nombre: <input type="text" name="nombre" size="60" required></p>
+            <p class="feedback-input">Apellido: <input type="text" name="apellido" size="40" required></p>
+            <p class="feedback-input">Tipo de usuario: <select name='tipo' required></p>
+                <option></option>
+            <?php     
+            foreach($listaTipousu as $tipousu){
+                    echo "<option value='".$tipousu['tipo_usuario']."'>".$tipousu['tipo_usuario']."</option>";
+                }
+            ?>
+            </select>
+            
+            <p class="feedback-input">Email: <input type="email" name="email" size="40" required></p>
+            <p class="feedback-input">Telefono: <input type="number" name="telf" size="40" required></p>
+            <p class="feedback-input">Contraseña: <input type="text" name="contra" size="40" required></p>
+            <input type="submit" value="Enviar" class="btnhistorial">
+        </form>
+    </center>
 </div>
 <?php
 }else{
