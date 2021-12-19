@@ -31,7 +31,7 @@ include '../../services/conexion.php';
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
     <br><br>
-<h2><b>Administrar mesas</b></h2>
+<h2><b>Modificar Mesa</b></h2>
 <?php
 /*------------------
 $ubicacionsql=$pdo->prepare("SELECT DISTINCT ubicacion_mesa FROM tbl_mesas");
@@ -42,11 +42,12 @@ $salassql=$pdo->prepare("SELECT nombre_sala FROM tbl_salas");
 $salassql->execute();
 $listaSalas=$salassql->fetchAll(PDO::FETCH_ASSOC);
 //------------------
-echo "<div class='filtrado'>";
+echo "<div>";
+echo "<center>";
     echo "<form action='modificar.mesa.php?id_mesa={$id_mesa}' method='POST'>";
-        echo "<p>Capacidad: <input type='number' name='capacidad' size='60' value='{$capacidad}'></p>";
+        echo "<p class='feedback-input'>Capacidad: <input type='number' name='capacidad' size='60' value='{$capacidad}'></p>";
         //echo "<p>Ubicacion: <input type='text' name='ubicacion' size='40' value='{$ubicacion}'></p>";
-        echo "<p>Ubicacion: <select name='ubicacion'>";
+        echo "<p class='feedback-input'>Ubicacion: <select name='ubicacion'>";
         echo "<option value='$ubicacion'>$ubicacion</option>";
             $contador=0;
             foreach($listaSalas as $salassql){
@@ -54,8 +55,9 @@ echo "<div class='filtrado'>";
                 echo "<option value='".$salassql['nombre_sala']."'>".$contador.".-".$salassql['nombre_sala']."</option>";
             }
         echo "</select></p>";
-        echo "<input type='submit' value='Enviar'>";
+        echo "<input type='submit' value='Enviar' class='btnhistorial'>";
     echo "</form>";
+    echo "</center>";
 echo "</div>";
 
 }else{

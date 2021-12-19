@@ -12,18 +12,24 @@
 </head>
 <body>
     <div class='paddingtop'>
-        <a class='btnlogout' href="../processes/logout.php">Log Out</a>
+        <a class='btnlogout' href="../../processes/logout.php">Log Out</a>
     </div>
 
-    <center>
-        <div class="table-centrada">
-            <a href='comedor.php'>Comedor</a>
-            <a href='terraza.php'>Terraza</a>
-        </div>
-        <div class="table-centrada">    
-            <a href='sala_privada.php'>Sala Privada</a>
-        </div>
-    </center>
-    
+<?php
+    include '../../services/conexion.php';
+
+    $sentencia=$pdo->prepare("SELECT nombre_sala,img_sala FROM tbl_salas");
+    $sentencia->execute();
+    $listaSalas=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        echo "<div class='container'>";
+            foreach ($listaSalas as $sala) {
+                echo "<div class='box'>";
+                    echo "<center><a href='{$sala['nombre_sala']}.php'><img src='{$sala['img_sala']}'></a></center>";
+                    echo "<span>{$sala['nombre_sala']}</span>";
+                echo "</div>";
+            }
+        echo "</div>";
+?>   
 </body>
 </html>

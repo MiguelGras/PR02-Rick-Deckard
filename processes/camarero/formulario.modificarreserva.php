@@ -51,12 +51,13 @@ echo "<div class='paddingtop'>";
 echo "</div>";
 //die;
 echo "<br><br>";
-echo "<h2><b>Administrar mesas</b></h2>";
+echo "<h2><b>Modificar Reserva</b></h2>";
 
-echo "<div class='filtrado'>";
+echo "<div>";
+echo "<center>";
     echo "<form action='modificar.reserva.php?id_mesa={$id_mesa}&id_reserva={$id_reserva}&fecha_reserva=$fecha&horainicial=$horainicial&nombre=$nombre' method='POST'>";
-        echo "<p>Fecha: <input type='date' name='fecha' size='60' value='{$fecha}' min=$fechasistema required></p>";
-        echo "Hora: <select name='hora'>";
+        echo "<p class='feedback-input'>Fecha: <input type='date' name='fecha' size='60' value='{$fecha}' min=$fechasistema required></p>";
+        echo "<p class='feedback-input'>Hora: <select name='hora'>";
                     echo "<option value='$horainicial' selected>$horainicial</option>";
                     echo "<option value='10:00:00'>10:00:00</option>";
                     echo "<option value='11:00:00'>11:00:00</option>";
@@ -71,9 +72,10 @@ echo "<div class='filtrado'>";
                     echo "<option value='20:00:00'>20:00:00</option>";
               echo "</select>";
         //<p><input type='time' name='hora' size='40' value='{$horainicial}' required></p>
-        echo "<p>Nombre Reserva: <input type='text' name='nombre' size='40' value='{$nombre}' required></p>";
+        echo "<p class='feedback-input'>Nombre Reserva: <input type='text' name='nombre' size='40' value='{$nombre}' required></p>";
         echo "<input type='submit' value='Enviar'>";
     echo "</form>";
+    echo "</center>";
 echo "</div>";
 
 }else{

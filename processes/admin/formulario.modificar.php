@@ -27,7 +27,6 @@ if(!empty($_SESSION['email'])){
     $apellido=$_GET['apellido_usuario'];
     $email=$_GET['email_usuario'];
     $telf=$_GET['telf_usuario'];
-    $contra=$_GET['contra_usuario'];
 
     /*
     echo $id_usuario;
@@ -48,17 +47,19 @@ if(!empty($_SESSION['email'])){
         <a class='btnhistorial' href='../../view/admin/camareros.php'>Camareros</a>
         <a class='btnlogout' href='../../processes/logout.php'>Log Out</a>
 </div>
-    <br>
+<br><br>
+    <h2><b>Modificar Usuario</b></h2>
 <?php
-echo "<div class='filtrado'>";
-    echo "<form action='modificar.usuario.php?id_usuario={$id_usuario}&tipo_usuario={$tipo_usuario}' method='POST'>";
-        echo "<p>Nombre: <input type='text' name='nombre' size='60' value='{$nombre}' required></p>";
-        echo "<p>Apellido: <input type='text' name='apellido' size='40' value='{$apellido}' required></p>";
-        echo "<p>Email: <input type='email' name='email' size='40' value='{$email}' required></p>";
-        echo "<p>Telefono: <input type='number' name='telf' size='40' value='{$telf}' required></p>";
-        echo "<p>Contraseña: <input type='text' name='contra' size='40' value='{$contra}' required></p>";
-        echo "<input type='submit' value='Enviar'>";
-    echo "</form>";
+echo "<div>";
+    echo "<center>";
+        echo "<form action='modificar.usuario.php?id_usuario={$id_usuario}&tipo_usuario={$tipo_usuario}' method='POST'>";
+            echo "<p class='feedback-input'>Nombre: <input type='text' name='nombre' size='60' value='{$nombre}' required></p>";
+            echo "<p class='feedback-input'>Apellido: <input type='text' name='apellido' size='40' value='{$apellido}' required></p>";
+            echo "<p class='feedback-input'>Email: <input type='email' name='email' size='40' value='{$email}' required></p>";
+            echo "<p class='feedback-input'>Telefono: <input type='number' name='telf' size='40' value='{$telf}' required></p>";
+            echo "<input type='submit' value='Enviar' class='btnhistorial'>";
+        echo "</form>";
+    echo "</center>";
 echo "</div>";
 
 }else{

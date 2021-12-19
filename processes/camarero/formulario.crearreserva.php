@@ -30,14 +30,15 @@ echo "<div class='paddingtop'>";
 echo"</div>";
 ?>
 <br><br>
-<h2><b>Administrar mesas</b></h2>
+<h2><b>Insertar Reserva</b></h2>
 
-<br>
-<div class='filtrado'>
+<div>
     <?php
+    echo "<center>";
     echo"<form action='insertar.reserva.php?id_mesa=$id_mesa' method='POST'>";
-            echo"<p>Fecha: <input type='date' name='fecha' size='60' min=$fechasistema required></p>";
-            echo"<p>Hora: <select name='horainicial' required>";
+    
+            echo"<p class='feedback-input'>Fecha: <input type='date' name='fecha' size='60' min=$fechasistema required></p>";
+            echo"<p class='feedback-input'>Hora: <select name='horainicial' required>";
                     echo" <option value=''></option>";
                     echo" <option value='10:00:00'>10:00:00</option>";
                     echo"<option value='11:00:00'>11:00:00</option>";
@@ -51,9 +52,10 @@ echo"</div>";
                     echo"<option value='19:00:00'>19:00:00</option>";
                     echo"<option value='20:00:00'>20:00:00</option>";
                 echo"</select></p>";
-            echo"<p>Nombre Reserva: <input type='text' name='nombre' size='40' required></p>";
-        echo"<input type='submit' value='Enviar'>";
+            echo"<p class='feedback-input'>Nombre Reserva: <input type='text' name='nombre' size='40' required></p>";
+        echo"<input type='submit' value='Enviar' class='btnhistorial'>";
     echo"</form>";
+    echo "</center>";
 echo"</div>";
 
 }else{

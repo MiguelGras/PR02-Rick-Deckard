@@ -64,6 +64,7 @@ if(!empty($_SESSION['email'])){
     <!--<a href='comedor.php' class='btnhistorial'>Comedor</a>-->
     <a href='administradores.php' class='btnhistorial'>Administradores</a>
     <a href='vistaadmin.php' class='btnhistorial'>Vista mesas</a>
+    <a href='salas.php' class='btnhistorial'>Salas</a>
 </div></center>
 
 <div class="filtrado">
@@ -85,7 +86,6 @@ if(!empty($_SESSION['email'])){
 <div class='centradotd'>
 <?php
 echo"<td><a href='../../processes/mesas/formulario.insertar.php' class='btnhistorial'>Crear mesa</a></td>";
-echo"<td><a href='../../processes/salas/formulario.insertar.php' class='btnhistorial'>Crear sala</a></td>";
 ?>
 </div>
 
