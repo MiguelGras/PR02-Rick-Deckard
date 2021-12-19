@@ -37,16 +37,15 @@ if ($fechasistema == $fecha) {
         */
         try {
             if(!empty($listaReservas)) {
-                //header("location:../../processes/camarero/formulario.crearreserva.php?id_mesa=$id_mesa");
                 exit("<script>
                             alert('Ya se ha reservado una mesa a esa hora')
                             location.href='../../processes/camarero/formulario.crearreserva.php?id_mesa=$id_mesa';
                     </script>");
             }elseif(empty($listaReservas)){
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $pdo->beginTransaction();
                 $insert = $pdo->prepare("INSERT INTO tbl_reservas (id_reserva,fecha_reserva,hora_inicio_reserva,hora_fin_reserva,nombre_reserva,id_mesa) VALUES (NULL,'{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
                 $inserthist = $pdo->prepare("INSERT INTO tbl_historial (id_historial,camarero_historial,fecha_historial,hora_inicio_historial,hora_fin_historial,nombre_historial,id_mesa) VALUES (NULL,'{$email}','{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
-                print_r($inserthist);
-                die;
                 try{
                     $insert-> execute();
                     $inserthist->execute();
@@ -62,6 +61,7 @@ if ($fechasistema == $fecha) {
                 
             }
         } catch (PDOException $e){
+            $pdo->rollBack();
             echo 'mal';
             echo  $e->getMessage();
         }
@@ -82,6 +82,8 @@ if ($fechasistema == $fecha) {
                         location.href='../../processes/camarero/formulario.crearreserva.php?id_mesa=$id_mesa';
                 </script>");
         }elseif(empty($listaReservas)){
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->beginTransaction();
             $insert = $pdo->prepare("INSERT INTO tbl_reservas (id_reserva,fecha_reserva,hora_inicio_reserva,hora_fin_reserva,nombre_reserva,id_mesa) VALUES (NULL,'{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
             $inserthist = $pdo->prepare("INSERT INTO tbl_historial (id_historial,fecha_historial,hora_inicio_historial,hora_fin_historial,nombre_historial,id_mesa) VALUES (NULL,'{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
             try{
@@ -99,50 +101,8 @@ if ($fechasistema == $fecha) {
             
         }
     } catch (PDOException $e){
+        $pdo->rollBack();
         echo 'mal';
         echo  $e->getMessage();
     }
 }
-
-/*
-    echo $fechasistema;
-    echo "<br>";
-    echo $horasistema;
-    die;
-*/
-//--------------
-/*
-    echo $fecha;
-    echo "<br>";
-    echo $horainicial;
-    echo "<br>";
-    echo $horafinal;
-    echo "<br>";
-    echo $nombre;
-    echo "<br>";
-    echo $id_mesa;
-    die;
-/*
-    echo "<br>";
-    echo $horamenos;
-    echo "<br>";
-    echo $horamas;
-    die;
-*/
-
-    
-    //print_r($insert);
-    //die;
-/*
-try{
-    $insert-> execute();
-    if(!empty($insert)){
-        header("location:../../view/camarero/reservamesa.php?id_mesa=$id_mesa");
-    }else{
-        echo '<script language="javascript">alert("No se ha podido introducir el administrador");</script>';
-    }
-}catch(PDOException $e){
-    echo 'mal';
-   echo  $e->getMessage();
-}
-*/
