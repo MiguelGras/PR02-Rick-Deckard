@@ -36,6 +36,7 @@ include '../../services/conexion.php';
     echo $nombre;
     die;
 */
+date_default_timezone_set("Europe/Madrid");
 $fechasistema=date('Y-m-d');
 $horasistema=date('H:i');
 
