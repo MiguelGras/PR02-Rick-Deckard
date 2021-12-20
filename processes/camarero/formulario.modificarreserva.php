@@ -56,7 +56,7 @@ echo "<h2><b>Modificar Reserva</b></h2>";
 echo "<div>";
 echo "<center>";
     echo "<form action='modificar.reserva.php?id_mesa={$id_mesa}&id_reserva={$id_reserva}&fecha_reserva=$fecha&horainicial=$horainicial&nombre=$nombre' method='POST'>";
-        echo "<p class='feedback-input'>Fecha: <input type='date' name='fecha' size='60' value='{$fecha}' min=$fechasistema required></p>";
+        echo "<p class='feedback-input'>Fecha: <input type='date' name='fecha' size='60' value='{$fecha}' min=$fechasistema></p>";
         echo "<p class='feedback-input'>Hora: <select name='hora'>";
                     echo "<option value='$horainicial' selected>$horainicial</option>";
                     echo "<option value='10:00:00'>10:00:00</option>";
