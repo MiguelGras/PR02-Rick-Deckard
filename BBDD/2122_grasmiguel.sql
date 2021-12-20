@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-12-2021 a las 20:34:17
+-- Tiempo de generación: 20-12-2021 a las 16:56:45
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.24
 
@@ -144,7 +144,7 @@ CREATE TABLE `tbl_usuarios` (
 --
 
 INSERT INTO `tbl_usuarios` (`id_usuario`, `tipo_usuario`, `nombre_usuario`, `apellido_usuario`, `email_usuario`, `contra_usuario`, `telf_usuario`) VALUES
-(1, 'admin', 'Marco', 'Marco', 'marco@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', 123456789),
+(1, 'admin', 'Marco', 'Marco', 'marco@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 123456789),
 (15, 'camarero', 'Miguel', 'Gras', 'miguel@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 634549817),
 (16, 'camarero', 'Cristian', 'Guerrero', 'cristian@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 633122211),
 (17, 'camarero', 'Marc', 'Ortiz', 'marc@gmail.com', 'bd4f881f9422e07ed3ee9da1284e4ef3', 635779744),
@@ -196,7 +196,7 @@ ALTER TABLE `tbl_usuarios`
 -- AUTO_INCREMENT de la tabla `tbl_historial`
 --
 ALTER TABLE `tbl_historial`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_mesas`
@@ -208,13 +208,13 @@ ALTER TABLE `tbl_mesas`
 -- AUTO_INCREMENT de la tabla `tbl_reservas`
 --
 ALTER TABLE `tbl_reservas`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_salas`
 --
 ALTER TABLE `tbl_salas`
-  MODIFY `id_sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_usuarios`

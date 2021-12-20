@@ -156,7 +156,7 @@ if(isset($_POST['filtrar'])){
         }
     }
 }else{
-    header("Location:../index.php");
+    header("Location:../../index.php");
 }
 
 

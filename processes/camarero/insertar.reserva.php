@@ -18,7 +18,7 @@ $horama= strtotime ( "1 hours" , strtotime ( $horainicial ) ) ;
 $horamas= date ('H:i' , $horama);
 
 //--------------Comprobacion de fecha del sistema para no poder hacer reservas en el pasado
-
+date_default_timezone_set("Europe/Madrid");
 $fechasistema=date('Y-m-d');
 $horasistema=date('H:i');
 if ($fechasistema == $fecha) {
@@ -42,10 +42,12 @@ if ($fechasistema == $fecha) {
                             location.href='../../processes/camarero/formulario.crearreserva.php?id_mesa=$id_mesa';
                     </script>");
             }elseif(empty($listaReservas)){
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $pdo->beginTransaction();
+                //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                //$pdo->beginTransaction();
                 $insert = $pdo->prepare("INSERT INTO tbl_reservas (id_reserva,fecha_reserva,hora_inicio_reserva,hora_fin_reserva,nombre_reserva,id_mesa) VALUES (NULL,'{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
-                $inserthist = $pdo->prepare("INSERT INTO tbl_historial (id_historial,camarero_historial,fecha_historial,hora_inicio_historial,hora_fin_historial,nombre_historial,id_mesa) VALUES (NULL,'{$email}','{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
+                //print_r($insert);
+                //die;
+                $inserthist = $pdo->prepare("INSERT INTO tbl_historial (id_historial,fecha_historial,hora_inicio_historial,hora_fin_historial,nombre_historial,id_mesa) VALUES (NULL,'{$fecha}','{$horainicial}','{$horafinal}','{$nombre}','{$id_mesa}');");
                 try{
                     $insert-> execute();
                     $inserthist->execute();
@@ -61,7 +63,7 @@ if ($fechasistema == $fecha) {
                 
             }
         } catch (PDOException $e){
-            $pdo->rollBack();
+            //$pdo->rollBack();
             echo 'mal';
             echo  $e->getMessage();
         }
