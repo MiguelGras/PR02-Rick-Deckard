@@ -1,84 +1,51 @@
 # PR02-Rick-Deckard
-# Título del Proyecto
 
-_Acá va un párrafo que describa lo que es el proyecto_ [eliminar y escribir una descripción]
+Este proyecto se basa en la simulacion de la administracion de un restaurante. En el se puede crear todo tipo de objetos (mesas, salas, usuarios, etc.) a su vez, como camarero, podemos administrar las reservas de dicho restaurante.
 
-## Comenzando 🚀
+# Pre-requisitos 📋
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+>1.- En caso de querer modificar el codigo fuente a nuestro gusto necesitaremos un editor de codigo, nosotros recomendamos Visual Studio Code (https://code.visualstudio.com/Download) este editor nos permitira realizar los cambios deseados.
 
-Mira **Deployment** (Despliegue) para conocer como desplegar el proyecto.
+>2.- Necesitaremos el programa XAMPP para poder interpretar los archivos PHP y no tengamos problemas (https://www.apachefriends.org/es/download.html)
 
+# Instalación 🔧
 
-### Pre-requisitos 📋
+## Teniendo GIT instalado:
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+>1.- Desde nuestro Visual Studio Code abrimos una nueva terminal (Ctrl+Shift+ñ)
+>2.- Nos colocamos dentro de nuestro directorio donde tengamos XAMPP instalado, mas en concreto htdocs. En nuestro caso _"C:\xampp\htdocs"_
+>3.- Abrimos una terminal nueva y ahi ejecutamos el siguiente comando _"git clone "enlace del codigo"_", esto nos creara un directorio que contenga el proyecto, en este caso la carpeta se llamara PR1.
+>4.- Una vez descargado el contenido de nuestro proyecto, lo que tendremos que hacer es en nuestro XAMPP iniciar el servicio de apache.
+>5.- Abrimos nuestro navegador favorito (recomendamos Google Chrome o Mozilla Firefox).
+>6.- Como url colocaremos lo siguiente _"localhost/"_ y podremos ver las carpetas que contiene nuestro proyecto. Si no deseamos ver las carpetas al final de la ruta añadimos _"/view"_ con lo que nos quedaria _"localhost/NombreProyecto/view"_ y accederiamos a la pagina principal de login.
 
-```
-Da un ejemplo: XAMPP, VSC, ...
-```
+## Sin tener GIT instalado:
 
-### Instalación 🔧
+>1.- Desde GitHub iremos al boton verde el cual pone "Code" ahi veremos la opcion de "Download .ZIP" y nos descargaremos el .ZIP de nuestro proyecto.
+>2.- Una vez descargado el .ZIP lo tendremos que colocar dentro de nuestro directorio donde tengamos XAMPP instalado, mas en concreto htdocs. En nuestro caso _"C:\xampp\htdocs"_
+>3.- Una vez colocado el contenido de nuestro proyecto, lo que tendremos que hacer es en nuestro XAMPP iniciar el servicio de apache.
+>4.- Abrimos nuestro navegador favorito (recomendamos Google Chrome o Mozilla Firefox).
+>5.- Como url colocaremos lo siguiente _"localhost/"_ y podremos ver las carpetas que contiene nuestro proyecto. Si no deseamos ver las carpetas al final de la ruta añadimos _"/view"_ con lo que nos quedaria _"localhost/NombreProyecto/view"_ y accederiamos a la pagina principal de login.
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo (de prueba) ejecutandose_
+# Despliegue 📦
 
-_Dí cómo será ese paso_
+Una manera de acceder a nuestro proyecto es a traves de http://pr02-rick-deckard.infinityfreeapp.com/
 
-```
-Da un ejemplo:
-- Descargar el proyecto desde GitHub (clonando o descargando el proyecto)
-- Directorio donde alojar l'app dentro del XAMPP
-- Localización del .sql
-- Importación de la base de datos
-- ...
-```
+# Construido con 🛠️
+Visual Studio Code - El editor de codigo que hemos utilizado para realizar el pryecto
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+# Versionado 📌
+0.1.40
 
+# Autores ✒️
+Miguel Gras - Diseñador web, Programador front-end
 
-## Despliegue 📦
+# Usuarios de entrada
+Admin:
+  miguelgras@gmail.com - qwe12345
+Camarero:
+  miguelgras@gmail.com - qwe12345
 
-_Agrega notas adicionales sobre como probar l'app en el hosting (url, usuarios de prueba, password...)._
-
-## Construido con 🛠️
-
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
-* [VSC](https://code.visualstudio.com/) - Usado para editar código fuente y ejecutar comandos
-
-## Contribuyendo 🖇️
-
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
-
-[Crear una nueva [Release](https://docs.github.com/es/repositories/releasing-projects-on-github/about-releases) para el proyecto acabado (este elemento se encuentra en el apartado About del repositorio) utilizando [SemVer](http://semver.org/) para el tag de la [Release](https://docs.github.com/es/repositories/releasing-projects-on-github/about-releases)]
-
-## Autores ✒️
-
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-* **Andrés Villanueva** - *Trabajo Inicial* - [dannylarrea](https://github.com/dannylarrea)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
-
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* etc.
+# Expresiones de Gratitud 🎁
+Agredecemos el envio de feedback sobre nuestro proyecto y todas la ideas para mejorar nuestro trabajo.
+Muchas gracias por descargaros nuestro trabajo. Esperemos que os guste.
